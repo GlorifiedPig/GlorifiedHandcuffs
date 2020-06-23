@@ -1,0 +1,2 @@
+
+GlorifiedHandcuffs.Config.TEMP = ""
