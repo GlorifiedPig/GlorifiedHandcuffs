@@ -32,18 +32,17 @@ boneManipPositions["handcuffed"] = {
 }
 
 function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return end
     ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
     resetBoneAngles( ply )
 
-    if surrendering and not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then
+    if surrendering then
         ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
-        ply:Freeze( true )
         for k, v in pairs( boneManipPositions["surrender"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
-    else
-        ply:Freeze( false )
     end
+    ply:Freeze( surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
@@ -61,13 +60,12 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
 
     if handcuffed then
         ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
-        ply:Freeze( true )
         for k, v in pairs( boneManipPositions["handcuffed"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
-    else
-        ply:Freeze( false )
+        ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
     end
+    ply:Freeze( handcuffed )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
@@ -79,7 +77,7 @@ function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end
 
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
+    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end )
 
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
