@@ -56,9 +56,9 @@ function GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
 end
 
 function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
+    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
     ply.GHHandcuffed = handcuffed
     resetBoneAngles( ply )
-    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
 
     if handcuffed then
         ply.GHWasFrozen = ply:IsFrozen()
@@ -81,7 +81,7 @@ function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end
 
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
+    GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
 end )
 
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
