@@ -33,7 +33,6 @@ boneManipPositions["handcuffed"] = {
 
 function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     if GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return end
-    ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
     resetBoneAngles( ply )
 
     if surrendering then
@@ -43,6 +42,7 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
         end
     end
     ply:Freeze( surrendering )
+    ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
@@ -55,7 +55,6 @@ end
 
 function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
-    ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
     resetBoneAngles( ply )
 
     if handcuffed then
@@ -66,6 +65,7 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
     end
     ply:Freeze( handcuffed )
+    ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
