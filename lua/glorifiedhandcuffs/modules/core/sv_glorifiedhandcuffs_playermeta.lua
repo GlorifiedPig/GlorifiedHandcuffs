@@ -76,6 +76,21 @@ function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) )
 end
 
+function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
+    handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply )
+    GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
+end
+
+function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
+    return ply:GlorifiedHandcuffs():GetHandcufferInternal()
+end
+
+function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
+    if not GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.GetPlayerHandcuffer( handcuffed ) != ply then return end
+    GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
+end
+
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
     GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end )
@@ -104,3 +119,9 @@ function CLASS:SetSurrenderingInternal( surrendering ) self.Surrendering = surre
 function CLASS:GetSurrenderingInternal() return self.Surrendering end
 function CLASS:SetHandcuffedInternal( handcuffed ) self.Handcuffed = handcuffed return self end
 function CLASS:GetHandcuffedInternal() return self.Handcuffed end
+function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer return self end
+function CLASS:GetHandcufferInternal() return self.Handcuffer end
+
+--[[ To-Do:
+    Be sure to remove the handcuffs if the handcuffer disconnects.
+]]--
