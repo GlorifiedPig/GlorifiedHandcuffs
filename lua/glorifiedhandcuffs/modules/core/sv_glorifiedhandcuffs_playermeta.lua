@@ -91,10 +91,6 @@ function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
 end
 
-concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
-end )
-
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
 end )
