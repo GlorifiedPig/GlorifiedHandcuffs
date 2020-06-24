@@ -31,24 +31,23 @@ boneManipPositions["handcuffed"] = {
     [leftHand] = Angle( 0, 0, 90 )
 }
 
-function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, shouldSurrender )
-    ply.GHSurrendering = shouldSurrender
+function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
+    ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
     resetBoneAngles( ply )
 
-    if shouldSurrender and not ply.GHHandcuffed then
-        ply.GHWasFrozen = ply:IsFrozen()
+    if surrendering and not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then
         ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
         ply:Freeze( true )
         for k, v in pairs( boneManipPositions["surrender"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     else
-        ply:Freeze( ply.GHWasFrozen or false )
+        ply:Freeze( false )
     end
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
-    return ply.GHSurrendering
+    return ply:GlorifiedHandcuffs():GetSurrenderingInternal()
 end
 
 function GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
@@ -57,23 +56,22 @@ end
 
 function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
-    ply.GHHandcuffed = handcuffed
+    ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
     resetBoneAngles( ply )
 
     if handcuffed then
-        ply.GHWasFrozen = ply:IsFrozen()
         ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
         ply:Freeze( true )
         for k, v in pairs( boneManipPositions["handcuffed"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     else
-        ply:Freeze( ply.GHWasFrozen or false )
+        ply:Freeze( false )
     end
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
-    return ply.GHHandcuffed
+    return ply:GlorifiedHandcuffs():GetHandcuffedInternal()
 end
 
 function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
@@ -87,3 +85,24 @@ end )
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
 end )
+
+local plyMeta = FindMetaTable( "Player" )
+
+local CLASS = {}
+CLASS.__index = CLASS
+
+AccessorFunc( CLASS, "m_player", "Player" )
+
+function plyMeta:GlorifiedHandcuffs()
+    if ( not self.GlorifiedHandcuffs_Internal ) then
+        self.GlorifiedHandcuffs_Internal = table.Copy( CLASS )
+        self.GlorifiedHandcuffs_Internal:SetPlayer( self )
+    end
+
+    return self.GlorifiedHandcuffs_Internal
+end
+
+function CLASS:SetSurrenderingInternal( surrendering ) self.Surrendering = surrendering return self end
+function CLASS:GetSurrenderingInternal() return self.Surrendering end
+function CLASS:SetHandcuffedInternal( handcuffed ) self.Handcuffed = handcuffed return self end
+function CLASS:GetHandcuffedInternal() return self.Handcuffed end
