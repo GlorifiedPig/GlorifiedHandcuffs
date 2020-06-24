@@ -35,7 +35,7 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, shouldSurrender )
     ply.GHSurrendering = shouldSurrender
     resetBoneAngles( ply )
 
-    if shouldSurrender then
+    if shouldSurrender and not ply.GHHandcuffed then
         ply.GHWasFrozen = ply:IsFrozen()
         ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
         ply:Freeze( true )
@@ -43,8 +43,6 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, shouldSurrender )
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     else
-        ply.GHSurrendering = false
-        resetBoneAngles( ply )
         ply:Freeze( ply.GHWasFrozen or false )
     end
 end
@@ -53,10 +51,39 @@ function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
     return ply.GHSurrendering
 end
 
-function GlorifiedHandcuffs.ToggleSurrenderPlayer( ply )
+function GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
     GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, not GlorifiedHandcuffs.IsPlayerSurrendering( ply ) )
 end
 
+function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
+    ply.GHHandcuffed = handcuffed
+    resetBoneAngles( ply )
+    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
+
+    if handcuffed then
+        ply.GHWasFrozen = ply:IsFrozen()
+        ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
+        ply:Freeze( true )
+        for k, v in pairs( boneManipPositions["handcuffed"] ) do
+            ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
+        end
+    else
+        ply:Freeze( ply.GHWasFrozen or false )
+    end
+end
+
+function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
+    return ply.GHHandcuffed
+end
+
+function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
+    GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) )
+end
+
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.ToggleSurrenderPlayer( ply )
-end)
+    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
+end )
+
+hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
+    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
+end )
