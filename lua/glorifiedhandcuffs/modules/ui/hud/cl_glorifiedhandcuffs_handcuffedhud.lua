@@ -35,6 +35,8 @@ hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
     draw.RoundedBox( 5, ScrW() / 2 - ( handcuffedFontW + 15 ) / 2, 5 + 96 + 5, handcuffedFontW + 15, 30, Color( 210, 80, 80 ) )
     draw.SimpleText( ghi18n.GetPhrase( "cuffed" ), "GlorifiedHandcuffs.HUD.Handcuffed", ScrW() / 2, 5 + 96 + 5 + 15, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 
+    if not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
+
     local hitToFreeText = string.Split( ghi18n.GetPhrase( "hitToFree" ), "%s" )
     surface.SetFont( "GlorifiedHandcuffs.HUD.BreakFree" )
     local spamFontW = surface.GetTextSize( hitToFreeText[1] )
