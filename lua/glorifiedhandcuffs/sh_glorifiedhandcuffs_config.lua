@@ -1,5 +1,6 @@
 
 GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC = function( ply )
+    if not ply:IsPlayer() then return end
     return ply:isCP()
 end
 
