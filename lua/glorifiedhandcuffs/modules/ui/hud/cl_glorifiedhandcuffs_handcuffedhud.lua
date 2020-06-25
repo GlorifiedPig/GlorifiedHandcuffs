@@ -21,11 +21,6 @@ local function percentageColor( percentage )
 end
 
 hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
-    -- debug break free thing
-    breakFreeProgress = math.Approach( breakFreeProgress, 250, 0.2 )
-    if breakFreeProgress >= 250 then breakFreeProgress = 0 end
-    -- end
-
     if not ply then ply = LocalPlayer() end
     surface.SetMaterial( cuffedMaterial )
     surface.SetDrawColor( 255, 255, 255 )
@@ -47,6 +42,11 @@ hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
     draw.SimpleText( "E", "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
     draw.SimpleText( hitToFreeText[2], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW + keyFontW, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 
-    draw.RoundedBox( 7, ScrW() / 2 - 250 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 250, 15, Color( 31, 31, 31, 230 ) )
-    draw.RoundedBox( 7, ScrW() / 2 - 250 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, breakFreeProgress, 15, percentageColor( breakFreeProgress / 250 ) )
+    local breakFreePercent = ( GlorifiedHandcuffs.BreakFreeTotal / GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL )
+    draw.SimpleText( GlorifiedHandcuffs.BreakFreeTotal, "DermaDefault", 25, 25 )
+    breakFreeProgress = Lerp( FrameTime() * 16, breakFreeProgress, breakFreePercent * 300 )
+    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 300, 15, Color( 31, 31, 31, 230 ) )
+    render.SetScissorRect( ScrW() / 2 - 300 / 2, 0, ScrW() / 2 - 300 / 2 + breakFreeProgress, ScrH(), true )
+    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 300, 15, percentageColor( breakFreeProgress / 300 ) )
+    render.SetScissorRect( 0, 0, ScrW(), ScrH(), false )
 end )
