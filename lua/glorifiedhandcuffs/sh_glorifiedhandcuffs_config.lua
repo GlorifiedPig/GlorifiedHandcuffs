@@ -4,3 +4,5 @@ GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME = 0.04
 GlorifiedHandcuffs.Config.BREAK_FREE_EXPIRY_TIME = 0.13
 GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL = 150
 GlorifiedHandcuffs.Config.BREAK_FREE_WANTED = true
+GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true
+GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav"

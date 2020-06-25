@@ -1,13 +1,13 @@
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
-    return ply:GetNW2Bool( "GlorifiedHandcuffs.Surrendering" )
+    return ply:GetNWBool( "GlorifiedHandcuffs.Surrendering" )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
-    return ply:GetNW2Bool( "GlorifiedHandcuffs.Handcuffed" )
+    return ply:GetNWBool( "GlorifiedHandcuffs.Handcuffed" )
 end
 
 function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
     local handcufferID = ply:GetNW2Int( "GlorifiedHandcuffs.Handcuffer" )
-    return handcufferID == 0 and nil or Player( ply:GetNW2Int( "GlorifiedHandcuffs.Handcuffer" ) )
+    return handcufferID == 0 and nil or Player( ply:GetNWInt( "GlorifiedHandcuffs.Handcuffer" ) )
 end

@@ -43,7 +43,7 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     end
     ply:Freeze( surrendering )
     ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
-    ply:SetNW2Bool( "GlorifiedHandcuffs.Surrendering", surrendering )
+    ply:SetNWBool( "GlorifiedHandcuffs.Surrendering", surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
@@ -65,11 +65,11 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         end
     else
         ply:GlorifiedHandcuffs():SetHandcufferInternal( nil )
-        ply:SetNW2Int( "GlorifiedHandcuffs.Handcuffer", 0 )
+        ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
     ply:Freeze( handcuffed )
     ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
-    ply:SetNW2Bool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
+    ply:SetNWBool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
 
     ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
 end
@@ -84,7 +84,7 @@ end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
-    handcuffed:SetNW2Int( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
+    handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
     handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
 end

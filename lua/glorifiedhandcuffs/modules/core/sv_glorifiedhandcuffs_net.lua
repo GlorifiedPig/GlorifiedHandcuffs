@@ -11,6 +11,11 @@ end )
 net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptFailed", function( len, ply )
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
     ply:GlorifiedHandcuffs().BreakFreeAttemptStart = nil
+    if not GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE then return end
+    if ply:GlorifiedHandcuffs().BreakFreeLastAttemptFailed == nil or CurTime() >= ply:GlorifiedHandcuffs().BreakFreeLastAttemptFailed + 5 then
+        ply:EmitSound( GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH )
+        ply:GlorifiedHandcuffs().BreakFreeLastAttemptFailed = CurTime()
+    end
 end )
 
 net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptSuccess", function( len, ply )
