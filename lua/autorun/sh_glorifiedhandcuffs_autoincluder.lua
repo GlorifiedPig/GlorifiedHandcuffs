@@ -102,8 +102,10 @@ local function gbIncludeFolder( folderName ) GlorifiedInclude.IncludeFolder( fol
 gbIncludeFile( "glorifiedhandcuffs/sh_glorifiedhandcuffs_compatibility.lua" )
 local function IncludeGBFiles()
     gbIncludeFile( "glorifiedhandcuffs/sv_glorifiedhandcuffs_config.lua" )
+    gbIncludeFile( "glorifiedhandcuffs/sh_glorifiedhandcuffs_config.lua" )
     gbIncludeFolder( "glorifiedhandcuffs/libraries/" )
     gbIncludeFolder( "glorifiedhandcuffs/localization/" )
+    gbIncludeFolder( "glorifiedhandcuffs/themes/" )
     gbIncludeFolder( "glorifiedhandcuffs/modules/" )
     hook.Run( "GlorifiedHandcuffs.FinishedLoading" )
 end

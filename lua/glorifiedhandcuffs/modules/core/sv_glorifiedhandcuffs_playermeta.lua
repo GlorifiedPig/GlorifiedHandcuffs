@@ -103,7 +103,7 @@ CLASS.__index = CLASS
 AccessorFunc( CLASS, "m_player", "Player" )
 
 function plyMeta:GlorifiedHandcuffs()
-    if ( not self.GlorifiedHandcuffs_Internal ) then
+    if not self.GlorifiedHandcuffs_Internal then
         self.GlorifiedHandcuffs_Internal = table.Copy( CLASS )
         self.GlorifiedHandcuffs_Internal:SetPlayer( self )
     end
