@@ -21,6 +21,11 @@ local function percentageColor( percentage )
 end
 
 hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
+    -- debug break free thing
+    breakFreeProgress = math.Approach( breakFreeProgress, 250, 0.2 )
+    if breakFreeProgress >= 250 then breakFreeProgress = 0 end
+    -- end
+
     if not ply then ply = LocalPlayer() end
     surface.SetMaterial( cuffedMaterial )
     surface.SetDrawColor( 255, 255, 255 )
