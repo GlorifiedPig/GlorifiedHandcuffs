@@ -2,7 +2,7 @@
 GlorifiedHandcuffs.Themes = {}
 
 local registeredThemes = {}
-local defaultTheme = "Dark"
+local defaultTheme = "Default"
 local selectedTheme
 
 function GlorifiedHandcuffs.Themes.Register( id, name, data )

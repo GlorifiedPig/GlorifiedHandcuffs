@@ -1,5 +1,5 @@
 
-GlorifiedHandcuffs.Themes.Register( "Dark", GlorifiedHandcuffs.i18n.GetPhrase( "glDarkTheme" ), {
+GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     Colors = {
         xpBarBackgroundDrawColor = Color( 31, 31, 31, 230 ),
     },
