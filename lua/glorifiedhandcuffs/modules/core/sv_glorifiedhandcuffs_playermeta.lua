@@ -102,6 +102,14 @@ hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapo
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
 end )
 
+hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )
+    for k, v in pairs( player.GetAll() ) do
+        if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then
+            GlorifiedHandcuffs.SetPlayerHandcuffedStatus( v, false )
+        end
+    end
+end )
+
 local plyMeta = FindMetaTable( "Player" )
 
 local CLASS = {}
@@ -124,10 +132,6 @@ function CLASS:SetHandcuffedInternal( handcuffed ) self.Handcuffed = handcuffed 
 function CLASS:GetHandcuffedInternal() return self.Handcuffed end
 function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer return self end
 function CLASS:GetHandcufferInternal() return self.Handcuffer end
-
---[[ To-Do:
-    Be sure to remove the handcuffs if the handcuffer disnects.
-]]--
 
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
     GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
