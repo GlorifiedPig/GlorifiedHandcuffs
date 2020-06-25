@@ -16,6 +16,9 @@ local function percentageColor( percentage )
       green = 510 * percentage
     elseif percentage > 0.5 && percentage <= 1 then
       red = -510 * percentage + 510
+    elseif percentage > 1 then
+        green = 255
+        red = 0
     end
     return Color( red, green, 0 )
 end
@@ -43,7 +46,6 @@ hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
     draw.SimpleText( hitToFreeText[2], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW + keyFontW, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 
     local breakFreePercent = ( GlorifiedHandcuffs.BreakFreeTotal / GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL )
-    draw.SimpleText( GlorifiedHandcuffs.BreakFreeTotal, "DermaDefault", 25, 25 )
     breakFreeProgress = Lerp( FrameTime() * 16, breakFreeProgress, breakFreePercent * 300 )
     draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 300, 15, Color( 31, 31, 31, 230 ) )
     render.SetScissorRect( ScrW() / 2 - 300 / 2, 0, ScrW() / 2 - 300 / 2 + breakFreeProgress, ScrH(), true )
