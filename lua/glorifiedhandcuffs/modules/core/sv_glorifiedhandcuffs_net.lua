@@ -21,7 +21,7 @@ end )
 net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptSuccess", function( len, ply )
     if ply:GlorifiedHandcuffs().BreakFreeAttemptStart == nil or CurTime() <= ply:GlorifiedHandcuffs().BreakFreeAttemptStart + ( GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL / 15 ) or not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, false )
-    if GlorifiedHandcuffs.Config.BREAK_FREE_WANTED then
+    if GlorifiedHandcuffs.Config.BREAK_FREE_WANTED and GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( GlorifiedHandcuffs.GetPlayerHandcuffer( ply ) ) then
         ply:wanted( GlorifiedHandcuffs.GetPlayerHandcuffer( ply ), GlorifiedHandcuffs.i18n.GetPhrase( "brokenFreeWanted" ), 180 )
     end
 end )
