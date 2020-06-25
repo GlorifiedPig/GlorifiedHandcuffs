@@ -43,6 +43,7 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     end
     ply:Freeze( surrendering )
     ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
+    ply:SetNW2Bool( "GlorifiedHandcuffs.Surrendering", surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
@@ -62,10 +63,15 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         for k, v in pairs( boneManipPositions["handcuffed"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
-        ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
+    else
+        ply:GlorifiedHandcuffs():SetHandcufferInternal( nil )
+        ply:SetNW2Int( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
     ply:Freeze( handcuffed )
     ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
+    ply:SetNW2Bool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
+
+    ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
@@ -78,6 +84,7 @@ end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
+    handcuffed:SetNW2Int( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
     handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
 end
@@ -119,5 +126,9 @@ function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer 
 function CLASS:GetHandcufferInternal() return self.Handcuffer end
 
 --[[ To-Do:
-    Be sure to remove the handcuffs if the handcuffer disconnects.
+    Be sure to remove the handcuffs if the handcuffer disnects.
 ]]--
+
+concommand.Add( "glorifiedhandcuffs_debug", function( ply )
+    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
+end )
