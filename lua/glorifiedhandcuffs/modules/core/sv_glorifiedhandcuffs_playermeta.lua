@@ -64,7 +64,7 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     else
-        ply:GlorifiedHandcuffs():SetHandcufferInternal( nil )
+        ply:GlorifiedHandcuffs():SetHandcufferInternal( 0 )
         ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
     ply:Freeze( handcuffed )
@@ -84,13 +84,14 @@ end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
+    handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply:UserID() )
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
-    handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
 end
 
 function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
-    return ply:GlorifiedHandcuffs():GetHandcufferInternal()
+    local handcufferID = ply:GlorifiedHandcuffs():GetHandcufferInternal()
+    return handcufferID != nil and Player( handcufferID ) or 0
 end
 
 function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
