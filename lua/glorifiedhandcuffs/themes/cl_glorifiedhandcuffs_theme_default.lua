@@ -1,8 +1,6 @@
 
 GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     Colors = {
-        xpBarBackgroundDrawColor = Color( 31, 31, 31, 230 ),
-
         scrollBarCol = Color( 105, 105, 105 ),
         scrollBarHoverCol = Color( 85, 85, 85 ),
 
@@ -18,6 +16,9 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         bailMenuBailButtonColorCanAffordHover = Color( 69, 155, 45 ),
         bailMenuBailButtonColorCantAfford = Color( 201, 60, 63 ),
         bailMenuBailButtonColorCantAffordHover = Color( 156, 40, 42 ),
+
+        bailNPC3D2DBackground = Color( 55, 55, 55, 155 ),
+        bailNPC3D2DText = Color( 255, 255, 255 ),
     },
     Fonts = {
         ["HUD.Handcuffed"] = {
@@ -50,6 +51,12 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
             weight = 500,
             antialias = true
         },
+        ["BailNPC.WordBox"] = {
+            font = "Roboto",
+            size = 50,
+            weight = 1000,
+            antialias = true
+        }
     },
     Materials = {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
