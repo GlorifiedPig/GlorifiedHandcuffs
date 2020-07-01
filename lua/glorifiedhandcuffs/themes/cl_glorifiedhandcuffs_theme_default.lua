@@ -2,6 +2,11 @@
 GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     Colors = {
         xpBarBackgroundDrawColor = Color( 31, 31, 31, 230 ),
+
+        bailMenuBackgroundColor = Color( 51, 51, 51 ),
+        bailMenuTitleBarBackgroundColor = Color( 34, 34, 34 ),
+        bailMenuCloseButtonBackgroundColor = Color( 255, 255, 255 ),
+        bailMenuCloseButtonHoverColor = Color( 210, 210, 210 ),
     },
     Fonts = {
         ["HUD.Handcuffed"] = {
@@ -16,9 +21,16 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
             weight = 1000,
             antialias = true
         },
+        ["BailMenu.TitleBar"] = {
+            font = "Roboto",
+            size = function() return ScrW() * 0.015 end,
+            weight = 500,
+            antialias = true
+        }
     },
     Materials = {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
+        close = Material( "glorifiedhandcuffs/close.png", "noclamp smooth" ),
     }
 } )
 GlorifiedHandcuffs.Themes.GenerateFonts()
