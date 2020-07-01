@@ -31,6 +31,13 @@ function PANEL:PerformLayout( w, h )
     end
 end
 
+function PANEL:Think()
+    if input.IsKeyDown( KEY_ESCAPE ) then
+        GlorifiedHandcuffs.UI.CloseBailMenu()
+        RunConsoleCommand( "cancelselect" )
+    end
+end
+
 function PANEL:Paint( w, h )
     draw.RoundedBox( 6, 0, 0, w, h, self.Theme.Data.Colors.bailMenuBackgroundColor )
 end
