@@ -24,7 +24,7 @@ if not GlorifiedPersistentEnts or GlorifiedPersistentEnts.Version < gpeVersion t
             Pos = ent:GetPos(),
             Angles = ent:GetAngles()
         } )
-        entData.NetworkVars = util.TableToJSON( ent:GetNetworkVars() )
+        entData.NetworkVars = util.TableToJSON( ent.GetNetworkVars and ent:GetNetworkVars() or {} )
 
         if ent.GPE_EntID != nil then
             sql.Query( "UPDATE `gpe` SET `PosInfo` = '" .. entData.PosInfo .. "', `NetworkVars` = '" .. entData.NetworkVars .. "' WHERE `RowID` = " .. ent.GPE_EntID )
@@ -81,19 +81,19 @@ if not GlorifiedPersistentEnts or GlorifiedPersistentEnts.Version < gpeVersion t
 
     hook.Add( "OnPhysgunFreeze", "GPE.OnPhysgunFreeze", function( wep, physObj, ent, ply )
         if GlorifiedPersistentEnts.EntClasses[ent:GetClass()] then
-            GlorifiedPersistentEnts.SaveEntityInfo( ent )
+            GlorifiedPersistentEnts.SaveEntityData( ent )
         end
     end )
 
     hook.Add( "PhysgunDrop", "GPE.PhysgunDrop", function( ply, ent )
         if GlorifiedPersistentEnts.EntClasses[ent:GetClass()] then
-            GlorifiedPersistentEnts.SaveEntityInfo( ent )
+            GlorifiedPersistentEnts.SaveEntityData( ent )
         end
     end )
 
     hook.Add( "PlayerSpawnedSENT", "GPE.PlayerSpawnedSENT", function( ply, ent )
         if GlorifiedPersistentEnts.EntClasses[ent:GetClass()] then
-            GlorifiedPersistentEnts.SaveEntityInfo( ent )
+            GlorifiedPersistentEnts.SaveEntityData( ent )
         end
     end )
 
