@@ -28,7 +28,7 @@ end
 
 vgui.Register( "GlorifiedHandcuffs.BailMenu.Menu", PANEL, "EditablePanel" )
 
-function GlorifiedHandcuffs.UI.OpenBailMenu( arrestedPlayers )
+function GlorifiedHandcuffs.UI.OpenBailMenu()
     if not IsValid( LocalPlayer() ) then return end
 
     if IsValid( GlorifiedHandcuffs.UI.BailMenu ) then
