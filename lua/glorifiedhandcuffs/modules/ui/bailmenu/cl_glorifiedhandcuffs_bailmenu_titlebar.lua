@@ -4,14 +4,12 @@ local PANEL = {}
 function PANEL:Init()
     self.Theme = self:GetParent().Theme
 
-    self.Elements = {}
-
     local titleLabel = vgui.Create( "DLabel", self )
     titleLabel:SetFont( "GlorifiedHandcuffs.BailMenu.TitleBar" )
     titleLabel:SetText( "Bail Menu" )
+    titleLabel:SizeToContents()
     titleLabel:DockMargin( 10, 0, 0, 0 )
     titleLabel:Dock( LEFT )
-    self.Elements["TitleLabel"] = titleLabel
 
     local closeButton = vgui.Create( "DButton", self )
     closeButton:SetText( "" )
@@ -21,14 +19,12 @@ function PANEL:Init()
             self:GetParent():Remove()
         end )
     end
-    self.Elements["CloseButton"] = closeButton
+    self.CloseButton = closeButton
 end
 
 function PANEL:PerformLayout( w, h )
-    self.Elements["TitleLabel"]:SizeToContents()
-
-    self.Elements["CloseButton"]:SetSize( w * 0.09, h )
-    self.Elements["CloseButton"].Paint = function( closeButton, closeButtonW, closeButtonH )
+    self.CloseButton:SetSize( w * 0.09, h )
+    self.CloseButton.Paint = function( closeButton, closeButtonW, closeButtonH )
         local iconSize = closeButtonH * 0.6
         if not closeButton.Color then closeButton.Color = self.Theme.Data.Colors.bailMenuCloseButtonBackgroundColor end
         closeButton.Color = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 5, closeButton.Color, closeButton:IsHovered() and self.Theme.Data.Colors.bailMenuCloseButtonHoverColor or self.Theme.Data.Colors.bailMenuCloseButtonBackgroundColor )
