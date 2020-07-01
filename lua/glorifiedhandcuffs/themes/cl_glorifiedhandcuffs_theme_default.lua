@@ -5,8 +5,8 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
 
         bailMenuBackgroundColor = Color( 51, 51, 51 ),
         bailMenuTitleBarBackgroundColor = Color( 34, 34, 34 ),
-        bailMenuCloseButtonBackgroundColor = Color( 255, 255, 255 ),
-        bailMenuCloseButtonHoverColor = Color( 210, 210, 210 ),
+        bailMenuCloseButtonBackgroundColor = Color( 201, 60, 63 ),
+        bailMenuCloseButtonHoverColor = Color( 134, 35, 37 ),
     },
     Fonts = {
         ["HUD.Handcuffed"] = {

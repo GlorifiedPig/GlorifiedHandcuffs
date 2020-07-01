@@ -2,7 +2,7 @@
 local PANEL = {}
 
 function PANEL:Init()
-    self:SetSize( ScrH() * 0.6, ScrH() * 0.72 )
+    self:SetSize( ScrH() * 0.6, ScrH() * 0.6 )
     self:Center()
     self:MakePopup()
 
@@ -15,7 +15,7 @@ end
 
 function PANEL:PerformLayout( w, h )
     self.TitleBar:Dock( TOP )
-    self.TitleBar:SetSize( w, h * 0.08 )
+    self.TitleBar:SetSize( w, h * 0.1 )
 
     if IsValid( self.Page ) then
         self.Page:Dock( FILL )

@@ -23,9 +23,9 @@ function PANEL:Init()
 end
 
 function PANEL:PerformLayout( w, h )
-    self.CloseButton:SetSize( w * 0.09, h )
+    self.CloseButton:SetSize( w * 0.085, h )
     self.CloseButton.Paint = function( closeButton, closeButtonW, closeButtonH )
-        local iconSize = closeButtonH * 0.6
+        local iconSize = closeButtonH * 0.4
         if not closeButton.Color then closeButton.Color = self.Theme.Data.Colors.bailMenuCloseButtonBackgroundColor end
         closeButton.Color = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 5, closeButton.Color, closeButton:IsHovered() and self.Theme.Data.Colors.bailMenuCloseButtonHoverColor or self.Theme.Data.Colors.bailMenuCloseButtonBackgroundColor )
         surface.SetDrawColor( closeButton.Color )
