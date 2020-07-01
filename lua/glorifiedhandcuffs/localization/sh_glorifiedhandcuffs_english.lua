@@ -5,5 +5,6 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     brokenFreeWanted = "Escaped from custody",
     bailMenu = "Bail Menu",
     bailPlayer = "Bail Player",
-    bailNpc = "Bail NPC"
+    bailNpc = "Bail NPC",
+    noPlayers = "There are no arrested players."
 } )
