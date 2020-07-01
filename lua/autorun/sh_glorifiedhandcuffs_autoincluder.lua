@@ -107,6 +107,7 @@ local function IncludeGBFiles()
     gbIncludeFolder( "glorifiedhandcuffs/localization/" )
     gbIncludeFile( "glorifiedhandcuffs/themes/cl_glorifiedhandcuffs_theme_default.lua" )
     gbIncludeFolder( "glorifiedhandcuffs/themes/" )
+    gbIncludeFolder( "glorifiedhandcuffs/modules/ui/libraries/" )
     gbIncludeFolder( "glorifiedhandcuffs/modules/" )
     hook.Run( "GlorifiedHandcuffs.FinishedLoading" )
 end

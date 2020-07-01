@@ -9,6 +9,13 @@ function PANEL:Init()
     self.Theme = GlorifiedHandcuffs.Themes.GetCurrent()
 
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.BailMenu.TitleBar", self )
+    self.ArrestedPlayers = vgui.Create( "GlorifiedHandcuffs.BailMenu.ArrestedPlayers", self )
+    for k, v in pairs( player.GetAll() ) do
+        if v:isArrested() then
+            self.ArrestedPlayers:AddPlayer( v )
+        end
+    end
+
     self:SetAlpha( 0 )
     self:AlphaTo( 255, 0.3 )
 end
@@ -16,6 +23,8 @@ end
 function PANEL:PerformLayout( w, h )
     self.TitleBar:Dock( TOP )
     self.TitleBar:SetSize( w, h * 0.1 )
+
+    self.ArrestedPlayers:Dock( FILL )
 
     if IsValid( self.Page ) then
         self.Page:Dock( FILL )

@@ -4,22 +4,21 @@ local PANEL = {}
 function PANEL:Init()
     self.Theme = self:GetParent().Theme
 
-    local titleLabel = vgui.Create( "DLabel", self )
-    titleLabel:SetFont( "GlorifiedHandcuffs.BailMenu.TitleBar" )
-    titleLabel:SetText( "Bail Menu" )
-    titleLabel:SizeToContents()
-    titleLabel:DockMargin( 10, 0, 0, 0 )
-    titleLabel:Dock( LEFT )
+    self.TitleLabel = vgui.Create( "DLabel", self )
+    self.TitleLabel:SetFont( "GlorifiedHandcuffs.BailMenu.TitleBar" )
+    self.TitleLabel:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "bailMenu" ) )
+    self.TitleLabel:SizeToContents()
+    self.TitleLabel:DockMargin( 10, 0, 0, 0 )
+    self.TitleLabel:Dock( LEFT )
 
-    local closeButton = vgui.Create( "DButton", self )
-    closeButton:SetText( "" )
-    closeButton:Dock( RIGHT )
-    closeButton.DoClick = function()
+    self.CloseButton = vgui.Create( "DButton", self )
+    self.CloseButton:SetText( "" )
+    self.CloseButton:Dock( RIGHT )
+    self.CloseButton.DoClick = function()
         self:GetParent():AlphaTo( 0, 0.3, 0, function()
             self:GetParent():Remove()
         end )
     end
-    self.CloseButton = closeButton
 end
 
 function PANEL:PerformLayout( w, h )
