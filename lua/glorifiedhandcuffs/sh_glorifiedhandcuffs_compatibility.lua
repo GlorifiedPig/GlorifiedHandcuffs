@@ -6,14 +6,26 @@ function GlorifiedHandcuffs.FormatMoney( money )
 end
 
 function GlorifiedHandcuffs.CanPlayerAfford( ply, money )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
     return ply:canAfford( money )
 end
 
+function GlorifiedHandcuffs.AddPlayerMoney( ply, money )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+    return ply:addMoney( money )
+end
+
 function GlorifiedHandcuffs.IsPlayerArrested( ply )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
     return ply:isArrested()
 end
 
 if SERVER then
+    function GlorifiedHandcuffs.UnArrestPlayer( ply )
+        if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+        ply:unArrest()
+    end
+
     function GlorifiedHandcuffs.Notify( ply, msgType, time, message )
         DarkRP.notify( ply, msgType, time, message )
     end

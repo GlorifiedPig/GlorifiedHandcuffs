@@ -2,6 +2,8 @@
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptStarted" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptFailed" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptSuccess" )
+util.AddNetworkString( "GlorifiedHandcuffs.Bail.OpenBailMenu" )
+util.AddNetworkString( "GlorifiedHandcuffs.Bail.RequestBailout" )
 
 net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptStarted", function( len, ply )
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
@@ -24,4 +26,17 @@ net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptSuccess", function( len, ply )
         ply:wanted( GlorifiedHandcuffs.GetPlayerHandcuffer( ply ), GlorifiedHandcuffs.i18n.GetPhrase( "brokenFreeWanted" ), 180 )
     end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, false )
+end )
+
+function GlorifiedHandcuffs.OpenBailMenu( ply )
+    net.Start( "GlorifiedHandcuffs.Bail.OpenBailMenu" )
+    net.Send( ply )
+end
+
+net.Receive( "GlorifiedHandcuffs.Bail.RequestBailout", function( len, ply )
+    local bailoutPlayer = net.ReadEntity()
+    if GlorifiedHandcuffs.CanPlayerAfford( ply, GlorifiedHandcuffs.Config.BAIL_AMOUNT ) and GlorifiedHandcuffs.IsPlayerArrested( bailoutPlayer ) then
+        GlorifiedHandcuffs.UnArrestPlayer( bailoutPlayer )
+        GlorifiedHandcuffs.AddPlayerMoney( ply, -GlorifiedHandcuffs.Config.BAIL_AMOUNT )
+    end
 end )

@@ -24,6 +24,14 @@ function PANEL:AddPlayer( ply )
     self.BailButton:SetFont( "GlorifiedHandcuffs.BailMenu.BailPlayer" )
     self.BailButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "bailPlayer" ) )
     self.BailButton:Dock( RIGHT )
+    self.BailButton.DoClick = function()
+        if GlorifiedHandcuffs.CanPlayerAfford( LocalPlayer(), GlorifiedHandcuffs.Config.BAIL_AMOUNT ) then
+            net.Start( "GlorifiedHandcuffs.Bail.RequestBailout" )
+            net.WriteEntity( self.Player )
+            net.SendToServer()
+            GlorifiedHandcuffs.UI.CloseBailMenu()
+        end
+    end
 end
 
 function PANEL:PerformLayout( w, h )

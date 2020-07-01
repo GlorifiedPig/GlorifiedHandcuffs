@@ -11,9 +11,9 @@ function PANEL:Init()
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.BailMenu.TitleBar", self )
     self.ArrestedPlayers = vgui.Create( "GlorifiedHandcuffs.BailMenu.ArrestedPlayers", self )
     for k, v in pairs( player.GetAll() ) do
-        --if GlorifiedHandcuffs.IsPlayerArrested( ply ) then
+        if GlorifiedHandcuffs.IsPlayerArrested( v ) then
             self.ArrestedPlayers:AddPlayer( v )
-        --end
+        end
     end
 
     self:SetAlpha( 0 )
@@ -48,4 +48,11 @@ function GlorifiedHandcuffs.UI.OpenBailMenu()
     GlorifiedHandcuffs.UI.BailMenu = vgui.Create( "GlorifiedHandcuffs.BailMenu.Menu" )
 end
 
-concommand.Add( "glorifiedhandcuffs_baildebug", GlorifiedHandcuffs.UI.OpenBailMenu )
+function GlorifiedHandcuffs.UI.CloseBailMenu()
+    GlorifiedHandcuffs.UI.BailMenu:AlphaTo( 0, 0.3, 0, function()
+        GlorifiedHandcuffs.UI.BailMenu:Remove()
+        GlorifiedHandcuffs.UI.BailMenu = nil
+    end )
+end
+
+net.Receive( "GlorifiedHandcuffs.Bail.OpenBailMenu", GlorifiedHandcuffs.UI.OpenBailMenu )

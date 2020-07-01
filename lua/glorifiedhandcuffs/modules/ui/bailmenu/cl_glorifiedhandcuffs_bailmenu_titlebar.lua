@@ -14,11 +14,7 @@ function PANEL:Init()
     self.CloseButton = vgui.Create( "DButton", self )
     self.CloseButton:SetText( "" )
     self.CloseButton:Dock( RIGHT )
-    self.CloseButton.DoClick = function()
-        self:GetParent():AlphaTo( 0, 0.3, 0, function()
-            self:GetParent():Remove()
-        end )
-    end
+    self.CloseButton.DoClick = GlorifiedHandcuffs.UI.CloseBailMenu
 end
 
 function PANEL:PerformLayout( w, h )
