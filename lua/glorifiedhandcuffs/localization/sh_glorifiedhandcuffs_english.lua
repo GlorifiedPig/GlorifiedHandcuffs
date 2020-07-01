@@ -4,5 +4,5 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     hitToFree = "Spam  %s  to break free",
     brokenFreeWanted = "Escaped from custody",
     bailMenu = "Bail Menu",
-    arrestedPlayers = "Arrested Players: %s",
+    bailPlayer = "Bail Player"
 } )

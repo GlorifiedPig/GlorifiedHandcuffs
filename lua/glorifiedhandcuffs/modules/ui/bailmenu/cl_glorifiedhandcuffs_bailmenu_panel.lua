@@ -11,9 +11,9 @@ function PANEL:Init()
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.BailMenu.TitleBar", self )
     self.ArrestedPlayers = vgui.Create( "GlorifiedHandcuffs.BailMenu.ArrestedPlayers", self )
     for k, v in pairs( player.GetAll() ) do
-        if v:isArrested() then
+        --if GlorifiedHandcuffs.IsPlayerArrested( ply ) then
             self.ArrestedPlayers:AddPlayer( v )
-        end
+        --end
     end
 
     self:SetAlpha( 0 )
