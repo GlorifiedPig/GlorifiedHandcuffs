@@ -44,7 +44,7 @@ function SWEP:PrimaryAttack()
     local tr = ply:GetEyeTraceNoCursor()
     if not tr.Hit then return end
 
-    local maxDist = GlorifiedHandcuffs.Config.MAXIMUM_HANDCUFF_DISTANCE
+    local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
 
@@ -57,7 +57,7 @@ function SWEP:SecondaryAttack()
     local tr = ply:GetEyeTraceNoCursor()
     if not tr.Hit then return end
 
-    local maxDist = GlorifiedHandcuffs.Config.MAXIMUM_HANDCUFF_DISTANCE
+    local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
 

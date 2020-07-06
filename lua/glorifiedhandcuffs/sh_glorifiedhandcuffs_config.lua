@@ -1,6 +1,6 @@
 
 GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC = function( ply )
-    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+    if not ply or isnumber( ply ) or not ply:IsValid() or not ply:IsPlayer() then return false end
     return ply:isCP()
 end
 
@@ -11,6 +11,9 @@ GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL = 25
 GlorifiedHandcuffs.Config.BREAK_FREE_WANTED = true
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav"
+
+GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125
+GlorifiedHandcuffs.Config.TIME_TO_CUFF = 5 -- How many seconds must the player remain within distance to handcuff?
 
 GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500
 

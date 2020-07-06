@@ -135,7 +135,7 @@ function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer 
 function CLASS:GetHandcufferInternal() return self.Handcuffer end
 
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
+    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end )
 
 -- To-Do: Be sure to remove handcuffs on as many conditions as possible. On player death, when the player is arrested, et cetera. Don't forget to remove the debug concommand!

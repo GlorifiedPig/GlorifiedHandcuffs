@@ -23,7 +23,17 @@ local function percentageColor( percentage )
     return Color( red, green, 0 )
 end
 
-hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
+local hitToFreeLocalization = ghi18n.GetPhrase( "hitToFree" )
+local cuffedLocalization = ghi18n.GetPhrase( "cuffed" )
+
+local hitToFreeText = string.Split( hitToFreeLocalization, "%s" )
+surface.SetFont( "GlorifiedHandcuffs.HUD.BreakFree" )
+local spamFontW = surface.GetTextSize( hitToFreeText[1] )
+local keyFontW = surface.GetTextSize( GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME )
+local hitToFreeFontW = surface.GetTextSize( hitToFreeLocalization )
+local handcuffedFontW = surface.GetTextSize( cuffedLocalization )
+
+hook.Add( "HUDPaint", "GlorifiedLeveling.HUD.Handcuffed", function()
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( LocalPlayer() ) then return end
     if not ply then ply = LocalPlayer() end
     surface.SetMaterial( cuffedMaterial )
@@ -31,27 +41,21 @@ hook.Add( "HUDPaint", "GlorifiedLeveling.HandcuffedHUD.Handcuffed", function()
     surface.DrawTexturedRect( ScrW() / 2 - 48, 5, 96, 96 )
 
     surface.SetFont( "GlorifiedHandcuffs.HUD.Handcuffed" )
-    local handcuffedFontW = surface.GetTextSize( ghi18n.GetPhrase( "cuffed" ) )
-    draw.RoundedBox( 5, ScrW() / 2 - ( handcuffedFontW + 15 ) / 2, 5 + 96 + 5, handcuffedFontW + 15, 30, Color( 210, 80, 80 ) )
-    draw.SimpleText( ghi18n.GetPhrase( "cuffed" ), "GlorifiedHandcuffs.HUD.Handcuffed", ScrW() / 2, 5 + 96 + 5 + 15, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+    draw.RoundedBox( 5, ScrW() / 2 - ( handcuffedFontW + 15 ) / 2, 106, handcuffedFontW + 15, 30, themeData.Colors.hudCuffedBackgroundColor )
+    draw.SimpleText( cuffedLocalization, "GlorifiedHandcuffs.HUD.Handcuffed", ScrW() / 2, 121, themeData.Colors.hudCuffedBackgroundTextColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 
     if not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
 
-    local hitToFreeText = string.Split( ghi18n.GetPhrase( "hitToFree" ), "%s" )
-    surface.SetFont( "GlorifiedHandcuffs.HUD.BreakFree" )
-    local spamFontW = surface.GetTextSize( hitToFreeText[1] )
-    local keyFontW = surface.GetTextSize( GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME )
-    local hitToFreeFontW = surface.GetTextSize( ghi18n.GetPhrase( "hitToFree" ) )
-    draw.RoundedBox( 5, ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2, 5 + 96 + 5 + 30 + 5, hitToFreeFontW + 15, 35, Color( 31, 31, 31, 230 ) )
-    draw.SimpleText( hitToFreeText[1], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
-    draw.RoundedBox( 6, ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 10 + spamFontW, 5 + 96 + 5 + 33 + 5 + 3, 20, 22, Color( 102, 176, 64 ) )
-    draw.SimpleText( GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME, "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
-    draw.SimpleText( hitToFreeText[2], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW + keyFontW, 5 + 96 + 5 + 15 + 32 + 5, Color( 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+    draw.RoundedBox( 5, ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2, 141, hitToFreeFontW + 15, 35, themeData.Colors.hudBreakFreeBackgroundColor )
+    draw.SimpleText( hitToFreeText[1], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15, 158, themeData.Colors.hudBreakFreeBackgroundTextColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+    draw.RoundedBox( 6, ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 10 + spamFontW, 147, 20, 22, themeData.Colors.hudBreakFreeKeypressBackgroundColor )
+    draw.SimpleText( GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME, "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW, 158, themeData.Colors.hudBreakFreeKeypressTextColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+    draw.SimpleText( hitToFreeText[2], "GlorifiedHandcuffs.HUD.BreakFree", ScrW() / 2 - ( hitToFreeFontW + 15 ) / 2 + 15 + spamFontW + keyFontW, 158, themeData.Colors.hudBreakFreeBackgroundTextColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 
     local breakFreePercent = ( GlorifiedHandcuffs.BreakFreeTotal / GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL )
     breakFreeProgress = Lerp( FrameTime() * 12, breakFreeProgress, breakFreePercent * 300 )
-    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 300, 15, Color( 31, 31, 31, 230 ) )
+    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 181, 300, 15, themeData.Colors.hudBreakFreeBackgroundColor )
     render.SetScissorRect( ScrW() / 2 - 300 / 2, 0, ScrW() / 2 - 300 / 2 + breakFreeProgress, ScrH(), true )
-    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 5 + 96 + 5 + 30 + 5 + 35 + 5, 300, 15, percentageColor( breakFreeProgress / 300 ) )
+    draw.RoundedBox( 7, ScrW() / 2 - 300 / 2, 181, 300, 15, percentageColor( breakFreeProgress / 300 ) )
     render.SetScissorRect( 0, 0, ScrW(), ScrH(), false )
 end )

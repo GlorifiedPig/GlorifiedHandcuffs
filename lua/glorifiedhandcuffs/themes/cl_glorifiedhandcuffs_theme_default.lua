@@ -17,6 +17,20 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         bailMenuBailButtonColorCantAfford = Color( 201, 60, 63 ),
         bailMenuBailButtonColorCantAffordHover = Color( 156, 40, 42 ),
 
+        hudCuffedBackgroundColor = Color( 210, 80, 80 ),
+        hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),
+        hudBreakFreeBackgroundColor = Color( 31, 31, 31, 230 ),
+        hudBreakFreeBackgroundTextColor = Color( 255, 255, 255 ),
+        hudBreakFreeKeypressBackgroundColor = Color( 102, 176, 64 ),
+        hudBreakFreeKeypressTextColor = Color( 255, 255, 255 ),
+
+        hudSurrenderingBackgroundColor = Color( 210, 80, 80 ),
+        hudSurrenderingBackgroundTextColor = Color( 255, 255, 255 ),
+        hudStopSurrenderingBackgroundColor = Color( 31, 31, 31, 230 ),
+        hudStopSurrenderingBackgroundTextColor = Color( 255, 255, 255 ),
+        hudStopSurrenderingKeypressBackgroundColor = Color( 102, 176, 64 ),
+        hudStopSurrenderingKeypressTextColor = Color( 255, 255, 255 ),
+
         bailNPC3D2DBackground = Color( 55, 55, 55, 155 ),
         bailNPC3D2DText = Color( 255, 255, 255 ),
     },
@@ -28,6 +42,18 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
             antialias = true
         },
         ["HUD.BreakFree"] = {
+            font = "Roboto",
+            size = 22,
+            weight = 1000,
+            antialias = true
+        },
+        ["HUD.Surrendering"] = {
+            font = "Roboto",
+            size = 20,
+            weight = 1000,
+            antialias = true
+        },
+        ["HUD.StopSurrendering"] = {
             font = "Roboto",
             size = 22,
             weight = 1000,
