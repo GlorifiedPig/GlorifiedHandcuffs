@@ -56,6 +56,8 @@ function GlorifiedHandcuffs.UI.OpenBailMenu()
 end
 
 function GlorifiedHandcuffs.UI.CloseBailMenu()
+    if not GlorifiedHandcuffs.UI.BailMenu then return end
+
     GlorifiedHandcuffs.UI.BailMenu:AlphaTo( 0, 0.3, 0, function()
         GlorifiedHandcuffs.UI.BailMenu:Remove()
         GlorifiedHandcuffs.UI.BailMenu = nil

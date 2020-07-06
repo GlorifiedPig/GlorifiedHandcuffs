@@ -60,6 +60,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     },
     Materials = {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
+        surrender = Material( "glorifiedhandcuffs/surrender.png", "noclamp smooth" ),
         close = Material( "glorifiedhandcuffs/close.png", "noclamp smooth" ),
     }
 } )

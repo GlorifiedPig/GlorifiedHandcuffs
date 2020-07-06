@@ -13,3 +13,10 @@ GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav"
 
 GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500
+
+GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
+
+GlorifiedHandcuffs.Config.BREAK_FREE_KEY = KEY_E
+GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME = "E"
+GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY = KEY_J
+GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J"

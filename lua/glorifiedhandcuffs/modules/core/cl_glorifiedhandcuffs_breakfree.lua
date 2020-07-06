@@ -3,7 +3,7 @@ local timeSinceLastKeyPress = 0
 GlorifiedHandcuffs.BreakFreeTotal = 0
 
 hook.Add( "PlayerButtonDown", "GlorifiedHandcuffs.BreakFree.PlayerButtonDown", function( ply, key )
-    if GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED and GlorifiedHandcuffs.IsPlayerHandcuffed( LocalPlayer() ) and key == KEY_E and SysTime() >= timeSinceLastKeyPress + GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME then
+    if GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED and GlorifiedHandcuffs.IsPlayerHandcuffed( LocalPlayer() ) and key == GlorifiedHandcuffs.Config.BREAK_FREE_KEY and SysTime() >= timeSinceLastKeyPress + GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME then
         timeSinceLastKeyPress = SysTime()
         keyPressedRecently = true
         GlorifiedHandcuffs.BreakFreeTotal = GlorifiedHandcuffs.BreakFreeTotal + 1
