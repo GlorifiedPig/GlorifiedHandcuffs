@@ -48,7 +48,12 @@ function SWEP:PrimaryAttack()
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
 
-    GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, tr.Entity )
+    timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer" )
+    timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer", GlorifiedHandcuffs.Config.TIME_TO_CUFF, 1, function()
+        if ply:Alive() and tr.Entity:Alive() and ply:GetPos():DistToSqr( tr.Entity:GetPos() ) <= maxDist * maxDist then
+            GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, tr.Entity )
+        end
+    end )
 end
 
 function SWEP:SecondaryAttack()
