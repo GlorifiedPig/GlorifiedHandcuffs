@@ -48,6 +48,8 @@ function SWEP:PrimaryAttack()
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
 
+    if not GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) then return end
+
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer" )
     timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer", GlorifiedHandcuffs.Config.TIME_TO_CUFF, 1, function()
         if ply:Alive() and tr.Entity:Alive() and ply:GetPos():DistToSqr( tr.Entity:GetPos() ) <= maxDist * maxDist then
