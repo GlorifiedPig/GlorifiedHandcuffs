@@ -67,6 +67,7 @@ function SWEP:SecondaryAttack()
     local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
+    if GlorifiedHandcuffs.GetPlayerHandcuffer( tr.Entity ) != ply then return end
 
     GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, tr.Entity )
 end
