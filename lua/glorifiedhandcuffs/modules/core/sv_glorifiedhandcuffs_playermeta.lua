@@ -99,6 +99,32 @@ function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
 end
 
+function GlorifiedHandcuffs.PlayerDragPlayer( ply, handcuffer )
+    GlorifiedHandcuffs.PlayerDragStopped( ply )
+    timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer", 0.1, 0, function()
+        GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
+    end )
+end
+
+function GlorifiedHandcuffs.PlayerDragStopped( ply )
+    timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer" )
+end
+
+function GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
+    local handcufferPos = handcuffer:GetPos()
+    local plyPos = ply:GetPos()
+    local handcufferAngle = ( handcufferPos - ply:GetShootPos() ):Angle()
+    local distanceAmount = plyPos:DistToSqr( handcufferPos )
+    if distanceAmount >= ( 100 * 100 ) then
+        if distanceAmount >= ( 500 * 500 ) then
+            GlorifiedHandcuffs.PlayerDragStopped( ply )
+            return
+        end
+        ply:SetEyeAngles( handcufferAngle + Angle( -35, 0, 0 ) )
+        ply:SetVelocity( handcufferPos - plyPos )
+    end
+end
+
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
 end )
