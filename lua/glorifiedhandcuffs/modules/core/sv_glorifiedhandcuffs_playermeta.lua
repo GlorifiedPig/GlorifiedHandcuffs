@@ -36,14 +36,16 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     resetBoneAngles( ply )
 
     if surrendering then
-        ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
         for k, v in pairs( boneManipPositions["surrender"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     end
+
     ply:Freeze( surrendering )
     ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
     ply:SetNWBool( "GlorifiedHandcuffs.Surrendering", surrendering )
+
+    GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
@@ -56,10 +58,10 @@ end
 
 function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false ) end
+    GlorifiedHandcuffs.PlayerDragStopped( ply )
     resetBoneAngles( ply )
 
     if handcuffed then
-        ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
         for k, v in pairs( boneManipPositions["handcuffed"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
@@ -67,11 +69,14 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         ply:GlorifiedHandcuffs():SetHandcufferInternal( 0 )
         ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
+
     ply:Freeze( handcuffed )
     ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
     ply:SetNWBool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
 
     ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
+
+    GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, handcuffed )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
@@ -100,6 +105,7 @@ function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
 end
 
 function GlorifiedHandcuffs.PlayerDragPlayer( ply, handcuffer )
+    if not ply or not ply:IsValid() then return end
     GlorifiedHandcuffs.PlayerDragStopped( ply )
     timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer", 0.1, 0, function()
         GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
@@ -107,6 +113,7 @@ function GlorifiedHandcuffs.PlayerDragPlayer( ply, handcuffer )
 end
 
 function GlorifiedHandcuffs.PlayerDragStopped( ply )
+    if not ply or not ply:IsValid() then return end
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer" )
 end
 
@@ -125,17 +132,38 @@ function GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
     end
 end
 
-hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply )
-    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return true end
+function GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, hasWeapon )
+    if hasWeapon then
+        ply:Give( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
+        ply:SelectWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
+    else
+        ply:StripWeapon( GlorifiedHandcuffs.Config.HANDS_SWEP_NAME )
+    end
+end
+
+function GlorifiedHandcuffs.ResetAllHandcuffVars( ply )
+    resetBoneAngles( ply )
+    GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, false )
+    GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, false )
+    GlorifiedHandcuffs.PlayerDragStopped( ply )
+    GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, false )
+end
+
+hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply, oldWeapon, newWeapon )
+    if newWeapon:GetClass() != GlorifiedHandcuffs.Config.HANDS_SWEP_NAME and ( GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) ) then return true end
 end )
 
 hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )
     for k, v in pairs( player.GetAll() ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then
-            GlorifiedHandcuffs.SetPlayerHandcuffedStatus( v, false )
+            GlorifiedHandcuffs.ResetAllHandcuffVars( v )
         end
     end
 end )
+
+hook.Add( "PlayerDeath", "GlorifiedHandcuffs.PlayerMeta.PlayerDeath", GlorifiedHandcuffs.ResetAllHandcuffVars )
+hook.Add( "playerArrested", "GlorifiedHandcuffs.PlayerMeta.playerArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
+hook.Add( "playerUnArrested", "GlorifiedHandcuffs.PlayerMeta.playerUnArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
 
 local plyMeta = FindMetaTable( "Player" )
 
@@ -163,5 +191,3 @@ function CLASS:GetHandcufferInternal() return self.Handcuffer end
 concommand.Add( "glorifiedhandcuffs_debug", function( ply )
     GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end )
-
--- To-Do: Be sure to remove handcuffs on as many conditions as possible. On player death, when the player is arrested, et cetera. Don't forget to remove the debug concommand!

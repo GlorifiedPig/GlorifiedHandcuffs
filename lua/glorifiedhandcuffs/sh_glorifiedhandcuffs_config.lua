@@ -17,7 +17,7 @@ GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100
 
 GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
 GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125
-GlorifiedHandcuffs.Config.TIME_TO_CUFF = 1 -- How many seconds must the player remain within distance to handcuff?
+GlorifiedHandcuffs.Config.TIME_TO_CUFF = 0.4 -- How many seconds must the player remain within distance to handcuff?
 
 GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500
 

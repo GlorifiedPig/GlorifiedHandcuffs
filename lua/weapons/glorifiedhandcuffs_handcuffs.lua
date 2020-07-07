@@ -1,4 +1,6 @@
 
+AddCSLuaFile()
+
 SWEP.PrintName = "Handcuffs"
 SWEP.Category = "GlorifiedHandcuffs"
 SWEP.Author = "GlorifiedPig"
@@ -17,28 +19,33 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
+SWEP.DrawAmmo = false
+SWEP.Base = "weapon_base"
+
 SWEP.Weight = 6
-SWEP.AutoSwitchTo = true
+SWEP.AutoSwitchTo = false
 SWEP.AutoSwitchFrom = false
 
+SWEP.Slot = 1
+
+SWEP.ViewModel = Model( "models/sterling/glorified_c_handcuffs.mdl" )
+SWEP.WorldModel = "models/sterling/glorified_w_handcuffs.mdl"
 SWEP.UseHands = true
-SWEP.WorldModel = ""
+SWEP.ViewModelFOV = 85
+
+SWEP.DrawCrosshair = false
 
 function SWEP:Initialize()
-    self:SetHoldType( "normal" )
+    self:SetHoldType( "pistol" )
 end
 
-function SWEP:Deploy()
-    if CLIENT or not IsValid( self:GetOwner() ) then return true end
-    self:GetOwner():DrawWorldModel( false )
-    return true
-end
-
+function SWEP:PrimaryAttack() end
 function SWEP:SecondaryAttack() end
 
 if CLIENT then return end
 
 function SWEP:PrimaryAttack()
+    self:SetNextPrimaryFire( CurTime() + GlorifiedHandcuffs.Config.TIME_TO_CUFF )
     local ply = self:GetOwner()
 
     local tr = ply:GetEyeTraceNoCursor()
@@ -47,12 +54,19 @@ function SWEP:PrimaryAttack()
     local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
-
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( tr.Entity ) then return end
     if not GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) then return end
+
+    self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+
+    timer.Simple( 1, function()
+        if not self then return end
+        self:SendWeaponAnim( ACT_VM_IDLE )
+    end )
 
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer" )
     timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer", GlorifiedHandcuffs.Config.TIME_TO_CUFF, 1, function()
-        if ply:Alive() and tr.Entity:Alive() and ply:GetPos():DistToSqr( tr.Entity:GetPos() ) <= maxDist * maxDist then
+        if ply and tr.Entity and ply:Alive() and tr.Entity:Alive() and ply:GetPos():DistToSqr( tr.Entity:GetPos() ) <= maxDist * maxDist then
             GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, tr.Entity )
         end
     end )
