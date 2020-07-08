@@ -2,7 +2,7 @@
 local PANEL = {}
 
 function PANEL:Init()
-    self:SetSize( ScrH() * 0.6, ScrH() * 0.6 )
+    self:SetSize( ScrH() * 0.6, ScrH() * 0.7 )
     self:Center()
     self:MakePopup()
 
@@ -18,6 +18,8 @@ function PANEL:Init()
 
     self.WalletInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
     self.WalletInfoBox:SetLabelInfo( "Wallet", "$10,000", Color( 0, 185, 0 ), Color( 255, 255, 255 ) )
+
+    self.WeaponsBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox", self )
 
     self:SetAlpha( 0 )
     self:AlphaTo( 255, 0.3 )
@@ -38,6 +40,10 @@ function PANEL:PerformLayout( w, h )
     self.WalletInfoBox:SetSize( w, h * 0.1 )
     self.WalletInfoBox:DockMargin( 15, 10, 15, 0 )
     self.WalletInfoBox:Dock( TOP )
+
+    self.WeaponsBox:SetSize( w, h * 0.38 )
+    self.WeaponsBox:Dock( TOP )
+    self.WeaponsBox:DockMargin( 15, 10, 15, 0 )
 end
 
 function PANEL:Think()

@@ -16,10 +16,6 @@ function PANEL:Init()
     self.RightLabel:Dock( RIGHT )
 end
 
-function PANEL:PerformLayout( w, h )
-
-end
-
 function PANEL:Paint( w, h )
     draw.RoundedBox( 6, 0, 0, w, h, self.Theme.Data.Colors.interactionMenuInfoBoxBackgroundColor )
 end
