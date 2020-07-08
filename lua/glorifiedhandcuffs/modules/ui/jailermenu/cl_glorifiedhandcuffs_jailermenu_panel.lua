@@ -12,29 +12,11 @@ function PANEL:Init()
 
     self:SetAlpha( 0 )
     self:AlphaTo( 255, 0.3 )
-
-    self.ConfirmButton = vgui.Create( "DButton", self )
-    self.ConfirmButton:SetText( "Confirm" )
-
-    self.CancelButton = vgui.Create( "DButton", self )
-    self.CancelButton:SetText( "Cancel" )
 end
 
 function PANEL:PerformLayout( w, h )
     self.TitleBar:Dock( TOP )
     self.TitleBar:SetSize( w, h * 0.1 )
-
-    self.ConfirmButton:SetPos( 15, h - ( h / 7 ) )
-    self.ConfirmButton:SetSize( w / 2.25, h / 7 )
-    self.ConfirmButton.Paint = function( confirmButton, confirmButtonW, confirmButtonH )
-        draw.RoundedBox( 6, 0, 0, confirmButtonW, confirmButtonH, Color( 0, 155, 0 ) )
-    end
-
-    self.CancelButton:SetPos( w - ( w / 2.25 ) - 15, h - ( h / 7 ) )
-    self.CancelButton:SetSize( w / 2.25, h / 7 )
-    self.CancelButton.Paint = function( cancelButton, cancelButtonW, cancelButtonH )
-        draw.RoundedBox( 6, 0, 0, cancelButtonW, cancelButtonH, Color( 155, 0, 0 ) )
-    end
 end
 
 function PANEL:Think()
@@ -69,5 +51,3 @@ function GlorifiedHandcuffs.UI.CloseJailerMenu()
         GlorifiedHandcuffs.UI.JailerMenu = nil
     end )
 end
-
-concommand.Add( "glorifiedhandcuffs_uidebug", GlorifiedHandcuffs.UI.OpenJailerMenu )
