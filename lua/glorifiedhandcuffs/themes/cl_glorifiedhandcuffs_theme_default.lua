@@ -22,6 +22,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         interactionMenuCloseButtonBackgroundColor = Color( 201, 60, 63 ),
         interactionMenuCloseButtonHoverColor = Color( 134, 35, 37 ),
         interactionMenuInfoBoxBackgroundColor = Color( 85, 85, 85 ),
+        interactionMenuInfoBoxTextColor = Color( 255, 255, 255 ),
         interactionMenuWeaponBackgroundColor = Color( 125, 125, 125 ),
 
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
@@ -98,19 +99,25 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         },
         ["InteractionMenu.InfoBox"] = {
             font = "Roboto",
-            size = function() return ScrW() * 0.014 end,
+            size = function() return ScrW() * 0.013 end,
             weight = 500,
             antialias = true
         },
         ["InteractionMenu.InfoBoxInfo"] = {
             font = "Roboto",
-            size = function() return ScrW() * 0.013 end,
+            size = function() return ScrW() * 0.012 end,
             weight = 500,
             antialias = true
         },
         ["InteractionMenu.WeaponBoxInfo"] = {
             font = "Roboto",
-            size = function() return ScrW() * 0.011 end,
+            size = function() return ScrW() * 0.01 end,
+            weight = 500,
+            antialias = true
+        },
+        ["InteractionMenu.BottomButtons"] = {
+            font = "Roboto",
+            size = function() return ScrW() * 0.012 end,
             weight = 500,
             antialias = true
         },

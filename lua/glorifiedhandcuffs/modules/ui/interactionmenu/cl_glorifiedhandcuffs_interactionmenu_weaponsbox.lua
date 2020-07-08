@@ -26,7 +26,7 @@ function PANEL:Paint( w, h )
     for k, v in pairs( self.Weapons ) do
         local line = math.ceil( k / 4 )
         local linePos = k - ( ( line - 1 ) * 4 )
-        v:SetPos( ( 5 * linePos ) + ( linePos - 1 ) * v:GetWide(), self.TitleBar:GetTall() + ( 5 * line ) + ( ( line - 1 ) * v:GetTall() ) )
+        v:SetPos( ( 7 * linePos ) + ( linePos - 1 ) * v:GetWide(), self.TitleBar:GetTall() + ( 5 * line ) + ( ( line - 1 ) * v:GetTall() ) )
         v:SetSize( w / 4.25, h * 0.35 )
     end
 end

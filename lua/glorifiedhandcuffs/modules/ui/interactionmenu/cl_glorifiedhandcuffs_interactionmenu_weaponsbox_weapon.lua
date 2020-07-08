@@ -13,12 +13,12 @@ function PANEL:Init()
     self.ModelPanel = vgui.Create( "SpawnIcon", self )
     self.ModelPanel:SetModel( "models/weapons/w_smg_mp5.mdl" )
     self.ModelPanel:Dock( LEFT )
-    self.ModelPanel:DockMargin( self.ModelPanel:GetWide() / 3.5, 0, 0, 0 )
+    self.ModelPanel:DockMargin( self.ModelPanel:GetWide() / 2, 0, 0, 0 )
 end
 
 function PANEL:PerformLayout()
     self.ConfiscateButton.Paint = function( confiscateButton, confiscateButtonW, confiscateButtonH )
-        draw.RoundedBoxEx( 6, 0, 0, confiscateButtonW, confiscateButtonH, Color( 185, 0, 0 ), false, false, true, true )
+        draw.RoundedBoxEx( 6, 0, 0, confiscateButtonW, confiscateButtonH, Color( 165, 0, 0 ), false, false, true, true )
     end
 end
 

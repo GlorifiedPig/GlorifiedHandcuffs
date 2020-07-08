@@ -6,7 +6,7 @@ function PANEL:Init()
 
     self.LeftLabel = vgui.Create( "DLabel", self )
     self.LeftLabel:SetFont( "GlorifiedHandcuffs.InteractionMenu.InfoBox" )
-    self.LeftLabel:SetColor( Color( 255, 255, 255 ) )
+    self.LeftLabel:SetColor( self.Theme.Data.Colors.interactionMenuInfoBoxTextColor )
     self.LeftLabel:DockMargin( 10, 0, 0, 0 )
     self.LeftLabel:Dock( LEFT )
 
@@ -27,7 +27,7 @@ function PANEL:SetLabelInfo( leftLabelName, rightLabelName, rightLabelColor, rig
     self.RightLabel:SetText( rightLabelName )
     self.RightLabel:SetTextColor( rightLabelTextColor )
     self.RightLabel:SizeToContents()
-    self.RightLabel:SetWidth( self.RightLabel:GetWide() + 10 )
+    self.RightLabel:SetWidth( self.RightLabel:GetWide() * 1.2 )
     self.RightLabel.Paint = function( rightLabel, rightLabelW, rightLabelH )
         draw.RoundedBox( 8, 0, 9, rightLabelW, rightLabelH - 18, rightLabelColor )
     end
