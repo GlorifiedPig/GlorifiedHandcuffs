@@ -17,6 +17,12 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         bailMenuBailButtonColorCantAfford = Color( 201, 60, 63 ),
         bailMenuBailButtonColorCantAffordHover = Color( 156, 40, 42 ),
 
+        interactionMenuBackgroundColor = Color( 51, 51, 51 ),
+        interactionMenuTitleBarBackgroundColor = Color( 34, 34, 34 ),
+        interactionMenuCloseButtonBackgroundColor = Color( 201, 60, 63 ),
+        interactionMenuCloseButtonHoverColor = Color( 134, 35, 37 ),
+        interactionMenuInfoBoxBackgroundColor = Color( 85, 85, 85 ),
+
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
         hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),
         hudBreakFreeBackgroundColor = Color( 31, 31, 31, 230 ),
@@ -82,7 +88,25 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
             size = 50,
             weight = 1000,
             antialias = true
-        }
+        },
+        ["InteractionMenu.TitleBar"] = {
+            font = "Roboto",
+            size = function() return ScrW() * 0.015 end,
+            weight = 500,
+            antialias = true
+        },
+        ["InteractionMenu.InfoBox"] = {
+            font = "Roboto",
+            size = function() return ScrW() * 0.014 end,
+            weight = 500,
+            antialias = true
+        },
+        ["InteractionMenu.InfoBoxInfo"] = {
+            font = "Roboto",
+            size = function() return ScrW() * 0.013 end,
+            weight = 500,
+            antialias = true
+        },
     },
     Materials = {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
