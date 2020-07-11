@@ -43,13 +43,13 @@ function PANEL:SetPlayer( ply )
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.TitleBar", self )
 
     self.NameInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.NameInfoBox:SetLabelInfo( "Name", ply:Nick(), Color( 45, 45, 45 ), Color( 255, 255, 255 ), self.Theme.Data.Materials.name )
+    self.NameInfoBox:SetLabelInfo( GlorifiedHandcuffs.i18n.GetPhrase( "name" ), ply:Nick(), self.Theme.Data.Colors.interactionMenuInfoBoxNameColor, self.Theme.Data.Colors.interactionMenuInfoBoxNameTextColor, self.Theme.Data.Materials.name )
 
     self.JobInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.JobInfoBox:SetLabelInfo( "Job", team.GetName( ply:Team() ), team.GetColor( ply:Team() ), Color( 255, 255, 255 ), self.Theme.Data.Materials.briefcase )
+    self.JobInfoBox:SetLabelInfo( GlorifiedHandcuffs.i18n.GetPhrase( "job" ), team.GetName( ply:Team() ), team.GetColor( ply:Team() ), self.Theme.Data.Colors.interactionMenuInfoBoxJobTextColor, self.Theme.Data.Materials.briefcase )
 
     self.WalletInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.WalletInfoBox:SetLabelInfo( "Wallet", GlorifiedHandcuffs.FormatMoney( GlorifiedHandcuffs.GetMoney( ply ) ), Color( 0, 200, 0 ), Color( 255, 255, 255 ), self.Theme.Data.Materials.money )
+    self.WalletInfoBox:SetLabelInfo( GlorifiedHandcuffs.i18n.GetPhrase( "wallet" ), GlorifiedHandcuffs.FormatMoney( GlorifiedHandcuffs.GetMoney( ply ) ), self.Theme.Data.Colors.interactionMenuInfoBoxWalletColor, self.Theme.Data.Colors.interactionMenuInfoBoxWalletTextColor, self.Theme.Data.Materials.money )
 
     self.WeaponsBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox", self )
     for k, v in pairs( ply:GetWeapons() ) do
@@ -59,8 +59,8 @@ function PANEL:SetPlayer( ply )
     end
 
     self.DragButton = vgui.Create( "DButton", self )
-    self.DragButton:SetTextColor( Color( 255, 255, 255 ) )
-    self.DragButton:SetText( "Drag Player" )
+    self.DragButton:SetTextColor( self.Theme.Data.Colors.interactionMenuDragPlayerTextColor )
+    self.DragButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "dragPlayer" ) )
     self.DragButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     local dragColor = self.Theme.Data.Colors.interactionMenuDragPlayerButton
     local dragHoverColor = self.Theme.Data.Colors.interactionMenuDragPlayerButtonHover
@@ -73,8 +73,8 @@ function PANEL:SetPlayer( ply )
     end
 
     self.ConfiscateButton = vgui.Create( "DButton", self )
-    self.ConfiscateButton:SetTextColor( Color( 255, 255, 255 ) )
-    self.ConfiscateButton:SetText( "Confiscate Illegal Weapons" )
+    self.ConfiscateButton:SetTextColor( self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsTextColor )
+    self.ConfiscateButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "confiscateIllegalWeapons" ) )
     self.ConfiscateButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     local confiscateColor = self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsColor
     local confiscateHoverColor = self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsColorHover

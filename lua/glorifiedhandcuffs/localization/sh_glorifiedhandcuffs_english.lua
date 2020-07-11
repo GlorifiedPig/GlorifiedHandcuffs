@@ -9,5 +9,11 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     noPlayers = "There are no arrested players.",
     surrendering = "You are surrendering",
     putHandsDown = "Press  %s  to put your hands down",
-    placeInJail = "You are going to place %s in jail for %s seconds.\nYou will receive %s as a reward."
+    placeInJail = "You are going to place %s in jail for %s seconds.\nYou will receive %s as a reward.",
+    name = "Name",
+    job = "Job",
+    wallet = "Wallet",
+    dragPlayer = "Drag Player",
+    confiscateIllegalWeapons = "Confiscate Illegal Weapons",
+    confiscate = "Confiscate"
 } )

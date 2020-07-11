@@ -6,7 +6,7 @@ function PANEL:Init()
 
     self.ConfiscateButton = vgui.Create( "DButton", self )
     self.ConfiscateButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.WeaponBoxInfo" )
-    self.ConfiscateButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.ConfiscateButton:SetTextColor( self.Theme.Data.Colors.interactionMenuConfiscateWeaponTextColor )
     self.ConfiscateButton:Dock( BOTTOM )
 
     self.ModelPanel = vgui.Create( "SpawnIcon", self )
@@ -34,7 +34,7 @@ function PANEL:SetWeaponInfo( weapon )
         draw.RoundedBoxEx( 6, 0, 0, confiscateButtonW, confiscateButtonH, curConfiscateColorLerped, false, false, true, true )
     end
     self.ConfiscateButton.OnCursorEntered = function()
-        self.ConfiscateButton:SetText( "Confiscate" )
+        self.ConfiscateButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "confiscate" ) )
     end
     self.ConfiscateButton.OnCursorExited = function()
         self.ConfiscateButton:SetText( weapon:GetPrintName() )
