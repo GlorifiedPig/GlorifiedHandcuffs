@@ -32,21 +32,9 @@ function PANEL:AddPlayer( ply )
             GlorifiedHandcuffs.UI.CloseBailMenu()
         end
     end
-end
-
-function PANEL:PerformLayout( w, h )
-    local avatarsize = h * 0.65
-
-    self.Avatar:SetSize( avatarsize, avatarsize )
-    self.Avatar:SetMaskSize( avatarsize * 0.5 )
-    self.Avatar:SetPos( h * 0.2, h * 0.18 )
-    self.Avatar:SetSteamID( self.Player:SteamID64(), avatarsize )
-
     local canAffordBail = GlorifiedHandcuffs.CanPlayerAfford( LocalPlayer(), GlorifiedHandcuffs.Config.BAIL_AMOUNT )
     local bailButtonColor = canAffordBail and self.Theme.Data.Colors.bailMenuBailButtonColorCanAfford or self.Theme.Data.Colors.bailMenuBailButtonColorCantAfford
     local bailButtonColorLerped = bailButtonColor
-
-    self.BailButton:SetSize( w * 0.3, h )
     self.BailButton.Paint = function( bailButton, bailButtonW, bailButtonH )
         if not bailButton:IsHovered() then
             bailButtonColor = canAffordBail and self.Theme.Data.Colors.bailMenuBailButtonColorCanAfford or self.Theme.Data.Colors.bailMenuBailButtonColorCantAfford
@@ -65,6 +53,17 @@ function PANEL:PerformLayout( w, h )
     self.BailButton.OnCursorExited = function()
         self.BailButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "bailPlayer" ) )
     end
+end
+
+function PANEL:PerformLayout( w, h )
+    local avatarsize = h * 0.65
+
+    self.Avatar:SetSize( avatarsize, avatarsize )
+    self.Avatar:SetMaskSize( avatarsize * 0.5 )
+    self.Avatar:SetPos( h * 0.2, h * 0.18 )
+    self.Avatar:SetSteamID( self.Player:SteamID64(), avatarsize )
+
+    self.BailButton:SetSize( w * 0.3, h )
 end
 
 vgui.Register( "GlorifiedHandcuffs.BailMenu.ArrestedPlayer", PANEL, "Panel" )

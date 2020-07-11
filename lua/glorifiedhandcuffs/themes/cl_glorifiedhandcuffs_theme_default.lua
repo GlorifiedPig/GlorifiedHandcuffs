@@ -24,6 +24,10 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         interactionMenuInfoBoxBackgroundColor = Color( 85, 85, 85 ),
         interactionMenuInfoBoxTextColor = Color( 255, 255, 255 ),
         interactionMenuWeaponBackgroundColor = Color( 125, 125, 125 ),
+        interactionMenuDragPlayerButton = Color( 0, 165, 0 ),
+        interactionMenuDragPlayerButtonHover = Color( 0, 135, 0 ),
+        interactionMenuConfiscateIllegalWeaponsColor = Color( 165, 0, 0 ),
+        interactionMenuConfiscateIllegalWeaponsColorHover = Color( 135, 0, 0 ),
 
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
         hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),

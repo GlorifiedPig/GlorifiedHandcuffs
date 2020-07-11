@@ -25,10 +25,29 @@ function PANEL:Init()
     self.DragButton:SetTextColor( Color( 255, 255, 255 ) )
     self.DragButton:SetText( "Drag Player" )
     self.DragButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
+    local dragColor = self.Theme.Data.Colors.interactionMenuDragPlayerButton
+    local dragHoverColor = self.Theme.Data.Colors.interactionMenuDragPlayerButtonHover
+    local curDragColor = dragColor
+    local curDragColorLerped = curDragColor
+    self.DragButton.Paint = function( dragButton, dragButtonW, dragButtonH )
+        curDragColor = dragButton:IsHovered() and dragHoverColor or dragColor
+        curDragColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, curDragColorLerped, curDragColor )
+        draw.RoundedBox( 6, 15, 0, dragButtonW - 20, dragButtonH, curDragColorLerped )
+    end
+
     self.ConfiscateButton = vgui.Create( "DButton", self )
     self.ConfiscateButton:SetTextColor( Color( 255, 255, 255 ) )
     self.ConfiscateButton:SetText( "Confiscate Illegal Weapons" )
     self.ConfiscateButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
+    local confiscateColor = self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsColor
+    local confiscateHoverColor = self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsColorHover
+    local curConfiscateColor = confiscateColor
+    local curConfiscateColorLerped = curConfiscateColor
+    self.ConfiscateButton.Paint = function( confiscateButton, confiscateButtonW, confiscateButtonH )
+        curConfiscateColor = confiscateButton:IsHovered() and confiscateHoverColor or confiscateColor
+        curConfiscateColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, curConfiscateColorLerped, curConfiscateColor )
+        draw.RoundedBox( 6, 6, 0, confiscateButtonW - 20, confiscateButtonH, curConfiscateColorLerped )
+    end
 
     self:SetAlpha( 0 )
     self:AlphaTo( 255, 0.3 )
@@ -57,16 +76,10 @@ function PANEL:PerformLayout( w, h )
     self.DragButton:SetSize( w / 2, 0 )
     self.DragButton:DockMargin( 0, 20, 0, 20 )
     self.DragButton:Dock( LEFT )
-    self.DragButton.Paint = function( dragButton, dragButtonW, dragButtonH )
-        draw.RoundedBox( 6, 15, 0, dragButtonW - 20, dragButtonH, Color( 0, 165, 0 ) )
-    end
 
     self.ConfiscateButton:SetSize( w / 2, 0 )
     self.ConfiscateButton:DockMargin( 0, 20, 0, 20 )
     self.ConfiscateButton:Dock( LEFT )
-    self.ConfiscateButton.Paint = function( confiscateButton, confiscateButtonW, confiscateButtonH )
-        draw.RoundedBox( 6, 6, 0, confiscateButtonW - 20, confiscateButtonH, Color( 165, 0, 0 ) )
-    end
 end
 
 function PANEL:Think()
