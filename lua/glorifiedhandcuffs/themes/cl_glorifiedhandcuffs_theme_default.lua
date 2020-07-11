@@ -28,6 +28,10 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         interactionMenuDragPlayerButtonHover = Color( 0, 135, 0 ),
         interactionMenuConfiscateIllegalWeaponsColor = Color( 165, 0, 0 ),
         interactionMenuConfiscateIllegalWeaponsColorHover = Color( 135, 0, 0 ),
+        interactionMenuConfiscateWeaponColor = Color( 165, 0, 0 ),
+        interactionMenuConfiscateWeaponColorHover = Color( 135, 0, 0 ),
+        interactionMenuConfiscateWeaponColorLegal = Color( 0, 145, 0 ),
+        interactionMenuConfiscateWeaponColorLegalHover = Color( 0, 115, 0 ),
 
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
         hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),
