@@ -19,12 +19,13 @@ function PANEL:Paint( w, h )
 end
 
 function PANEL:SetWeaponInfo( weapon )
-    local weaponIllegal = true
+    local weaponClass = weapon:GetClass()
+    self.WeaponLegal = GlorifiedHandcuffs.Config.LEGAL_WEAPONS[weaponClass] and GlorifiedHandcuffs.HasGunLicense( ply )
     self.ModelPanel:SetModel( weapon:GetWeaponWorldModel() )
 
     self.ConfiscateButton:SetText( weapon:GetPrintName() )
-    local confiscateColor = weaponIllegal and self.Theme.Data.Colors.interactionMenuConfiscateWeaponColor or self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorLegal
-    local confiscateHoverColor = weaponIllegal and self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorHover or self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorLegalHover
+    local confiscateColor = self.WeaponLegal and self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorLegal or self.Theme.Data.Colors.interactionMenuConfiscateWeaponColor
+    local confiscateHoverColor = self.WeaponLegal and self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorLegalHover or self.Theme.Data.Colors.interactionMenuConfiscateWeaponColorHover
     local curConfiscateColor = confiscateColor
     local curConfiscateColorLerped = curConfiscateColor
     self.ConfiscateButton.Paint = function( confiscateButton, confiscateButtonW, confiscateButtonH )

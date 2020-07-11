@@ -25,3 +25,29 @@ GlorifiedHandcuffs.Config.BREAK_FREE_KEY = KEY_E
 GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME = "E"
 GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY = KEY_J
 GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J"
+
+GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST = false
+GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = {
+    ["keys"] = true,
+    ["arrest_stick"] = true,
+    ["door_ram"] = true,
+    ["lockpick"] = true,
+    ["med_kit"] = true,
+    ["pocket"] = true,
+    ["stunstick"] = true,
+    ["unarrest_stick"] = true,
+    ["weaponchecker"] = true,
+    ["weapon_keypadchecker"] = true,
+    ["weapon_bugbait"] = true,
+    ["weapon_fists"] = true,
+    ["gmod_camera"] = true,
+    ["manhack_welder"] = true,
+    ["weapon_medkit"] = true,
+    ["gmod_tool"] = true,
+    ["weapon_physgun"] = true,
+    ["weapon_physcannon"] = true,
+}
+GlorifiedHandcuffs.Config.LEGAL_WEAPONS = { -- Weapons that are legal with a gun license.
+    ["weapon_glock2"] = true,
+    ["weapon_fiveseven2"] = true
+}

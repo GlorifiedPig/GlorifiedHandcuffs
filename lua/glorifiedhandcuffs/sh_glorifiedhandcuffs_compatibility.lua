@@ -5,6 +5,11 @@ function GlorifiedHandcuffs.FormatMoney( money )
     return DarkRP.formatMoney( money )
 end
 
+function GlorifiedHandcuffs.GetMoney( ply )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+    return ply:getDarkRPVar( "money" )
+end
+
 function GlorifiedHandcuffs.CanPlayerAfford( ply, money )
     if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
     return ply:canAfford( money )
@@ -18,6 +23,11 @@ end
 function GlorifiedHandcuffs.IsPlayerArrested( ply )
     if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
     return ply:isArrested()
+end
+
+function GlorifiedHandcuffs.HasGunLicense( ply )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+    return ply:getDarkRPVar( "HasGunlicense" )
 end
 
 if SERVER then

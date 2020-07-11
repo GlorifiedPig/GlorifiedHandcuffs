@@ -7,14 +7,12 @@ function PANEL:Init()
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.TitleBar", self )
 
     self.Weapons = {}
-    self.Weapons[1] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[2] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[3] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[4] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[5] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[6] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[7] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
-    self.Weapons[8] = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self )
+end
+
+function PANEL:AddWeapon( weapon )
+    if table.Count( self.Weapons ) >= 8 then return end
+    local newWeapon = table.insert( self.Weapons, vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox.Weapon", self ) )
+    self.Weapons[newWeapon]:SetWeaponInfo( weapon )
 end
 
 function PANEL:Paint( w, h )
