@@ -44,6 +44,7 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     ply:Freeze( surrendering )
     ply:GlorifiedHandcuffs().Surrendering = surrendering
     ply:SetNWBool( "GlorifiedHandcuffs.Surrendering", surrendering )
+    hook.Run( "GlorifiedHandcuffs.PlayerSurrenderStatusUpdated", ply, surrendering )
 
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, surrendering )
 end
@@ -74,6 +75,7 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
     ply:Freeze( handcuffed )
     ply:GlorifiedHandcuffs().Handcuffed = handcuffed
     ply:SetNWBool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
+    hook.Run( "GlorifiedHandcuffs.PlayerHandcuffStatusUpdated", ply, handcuffed )
 
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, handcuffed )
 end
@@ -91,16 +93,18 @@ function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
     handcuffed:GlorifiedHandcuffs().Handcuffer = ply:UserID()
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
-end
-
-function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
-    local handcufferID = ply:GlorifiedHandcuffs().Handcuffer
-    return handcufferID != nil and Player( handcufferID ) or 0
+    hook.Run( "GlorifiedHandcuffs.PlayerHandcuffPlayer", ply, handcuffed )
 end
 
 function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.GetPlayerHandcuffer( handcuffed ) != ply then return end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
+    hook.Run( "GlorifiedHandcuffs.PlayerUnHandcuffPlayer", ply, handcuffed )
+end
+
+function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
+    local handcufferID = ply:GlorifiedHandcuffs().Handcuffer
+    return handcufferID != nil and Player( handcufferID ) or 0
 end
 
 function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
@@ -206,4 +210,36 @@ function plyMeta:GlorifiedHandcuffs()
     end
 
     return self.GlorifiedHandcuffs_Internal
+end
+
+function CLASS:SetSurrenderStatus( surrendering )
+    GlorifiedHandcuffs.SetPlayerSurrenderStatus( self, surrendering )
+end
+
+function CLASS:IsSurrendering()
+    return GlorifiedHandcuffs.IsPlayerSurrendering( self )
+end
+
+function CLASS:ToggleSurrendering()
+    GlorifiedHandcuffs.TogglePlayerSurrendering( self )
+end
+
+function CLASS:SetHandcuffedStatus( handcuffed )
+    GlorifiedHandcuffs.SetPlayerHandcuffedStatus( self, handcuffed )
+end
+
+function CLASS:IsHandcuffed()
+    return GlorifiedHandcuffs.IsPlayerHandcuffed( self )
+end
+
+function CLASS:ToggleHandcuffed()
+    GlorifiedHandcuffs.TogglePlayerHandcuffed( self )
+end
+
+function CLASS:GetHandcuffer()
+    return GlorifiedHandcuffs.GetPlayerHandcuffer( self )
+end
+
+function CLASS:StripAllIllegalWeapons()
+    GlorifiedHandcuffs.StripAllIllegalWeapons( self )
 end
