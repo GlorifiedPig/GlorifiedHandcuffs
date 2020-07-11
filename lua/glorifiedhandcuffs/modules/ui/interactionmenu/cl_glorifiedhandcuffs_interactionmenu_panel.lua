@@ -91,6 +91,12 @@ function PANEL:SetPlayer( ply )
         curConfiscateColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, curConfiscateColorLerped, curConfiscateColor )
         draw.RoundedBox( 6, 6, 0, confiscateButtonW - 20, confiscateButtonH, curConfiscateColorLerped )
     end
+    self.ConfiscateButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StripIllegalWeapons" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
+    end
 
     self:SetAlpha( 0 )
     self:AlphaTo( 255, 0.3 )

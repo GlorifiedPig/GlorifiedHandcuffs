@@ -37,7 +37,15 @@ function PANEL:SetWeaponInfo( weapon )
         self.ConfiscateButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "confiscate" ) )
     end
     self.ConfiscateButton.OnCursorExited = function()
+        if not weapon then return end
         self.ConfiscateButton:SetText( weapon:GetPrintName() )
+    end
+    self.ConfiscateButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StripWeapon" )
+        net.WriteEntity( weapon:GetOwner() )
+        net.WriteString( weapon:GetClass() )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
     end
 end
 
