@@ -71,6 +71,12 @@ function PANEL:SetPlayer( ply )
         curDragColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, curDragColorLerped, curDragColor )
         draw.RoundedBox( 6, 15, 0, dragButtonW - 20, dragButtonH, curDragColorLerped )
     end
+    self.DragButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
+    end
 
     self.ConfiscateButton = vgui.Create( "DButton", self )
     self.ConfiscateButton:SetTextColor( self.Theme.Data.Colors.interactionMenuConfiscateIllegalWeaponsTextColor )
@@ -105,7 +111,7 @@ vgui.Register( "GlorifiedHandcuffs.InteractionMenu.Menu", PANEL, "EditablePanel"
 
 function GlorifiedHandcuffs.UI.OpenInteractionMenu( interactedPly )
     if not IsValid( LocalPlayer() ) then return end
-    if not interactedPly then interactedPly = LocalPlayer() end -- Remove this line, only for debugging!
+    if not interactedPly then return end
 
     if IsValid( GlorifiedHandcuffs.UI.InteractionMenu ) then
         GlorifiedHandcuffs.UI.InteractionMenu:Remove()
@@ -126,4 +132,6 @@ function GlorifiedHandcuffs.UI.CloseInteractionMenu()
     end )
 end
 
-concommand.Add( "glorifiedhandcuffs_uidebug", GlorifiedHandcuffs.UI.OpenInteractionMenu )
+net.Receive( "GlorifiedHandcuffs.InteractionMenu.OpenInteractionMenu", function()
+    GlorifiedHandcuffs.UI.OpenInteractionMenu( net.ReadEntity() )
+end )

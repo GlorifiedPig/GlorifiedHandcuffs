@@ -119,31 +119,33 @@ function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
     end
 end
 
-function GlorifiedHandcuffs.PlayerDragPlayer( ply, handcuffer )
-    if not ply or not ply:IsValid() then return end
+function GlorifiedHandcuffs.PlayerDragPlayer( ply, dragger )
+    if not ply or not ply:IsValid() or ply:GlorifiedHandcuffs().BeingDragged then return end
     GlorifiedHandcuffs.PlayerDragStopped( ply )
+    ply:GlorifiedHandcuffs().BeingDragged = true
     timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer", 0.1, 0, function()
-        GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
+        GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
     end )
 end
 
 function GlorifiedHandcuffs.PlayerDragStopped( ply )
     if not ply or not ply:IsValid() then return end
+    ply:GlorifiedHandcuffs().BeingDragged = false
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer" )
 end
 
-function GlorifiedHandcuffs.PlayerDragMove( ply, handcuffer )
-    local handcufferPos = handcuffer:GetPos()
+function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
+    local draggerPos = dragger:GetPos()
     local plyPos = ply:GetPos()
-    local handcufferAngle = ( handcufferPos - ply:GetShootPos() ):Angle()
-    local distanceAmount = plyPos:DistToSqr( handcufferPos )
+    local draggerAngle = ( draggerPos - ply:GetShootPos() ):Angle()
+    local distanceAmount = plyPos:DistToSqr( draggerPos )
     if distanceAmount >= ( 100 * 100 ) then
         if distanceAmount >= ( 500 * 500 ) then
             GlorifiedHandcuffs.PlayerDragStopped( ply )
             return
         end
-        ply:SetEyeAngles( handcufferAngle + Angle( -35, 0, 0 ) )
-        ply:SetVelocity( handcufferPos - plyPos )
+        ply:SetEyeAngles( draggerAngle + Angle( -35, 0, 0 ) )
+        ply:SetVelocity( draggerPos - plyPos )
     end
 end
 
@@ -203,7 +205,3 @@ function CLASS:SetHandcuffedInternal( handcuffed ) self.Handcuffed = handcuffed 
 function CLASS:GetHandcuffedInternal() return self.Handcuffed end
 function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer return self end
 function CLASS:GetHandcufferInternal() return self.Handcuffer end
-
-concommand.Add( "glorifiedhandcuffs_debug", function( ply )
-    GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
-end )

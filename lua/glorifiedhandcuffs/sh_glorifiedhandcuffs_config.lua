@@ -46,8 +46,10 @@ GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = {
     ["gmod_tool"] = true,
     ["weapon_physgun"] = true,
     ["weapon_physcannon"] = true,
+    ["glorifiedhandcuffs_restrained"] = true,
+    ["glorifiedhandcuffs_handcuffs"] = true,
 }
 GlorifiedHandcuffs.Config.LEGAL_WEAPONS = { -- Weapons that are legal with a gun license.
     ["weapon_glock2"] = true,
-    ["weapon_fiveseven2"] = true
+    ["weapon_fiveseven2"] = true,
 }

@@ -1,9 +1,31 @@
 
+util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.OpenInteractionMenu" )
+util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptStarted" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptFailed" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptSuccess" )
 util.AddNetworkString( "GlorifiedHandcuffs.Bail.OpenBailMenu" )
 util.AddNetworkString( "GlorifiedHandcuffs.Bail.RequestBailout" )
+
+hook.Add( "PlayerUse", "GlorifiedHandcuffs.InteractionMenu.PlayerUse", function( ply, ent )
+    if ent:IsPlayer() and GlorifiedHandcuffs.GetPlayerHandcuffer( ent ) == ply and ( not ply:GlorifiedHandcuffs().NextInteractionMenuUse or CurTime() >= ply:GlorifiedHandcuffs().NextInteractionMenuUse ) then
+        if ent:GlorifiedHandcuffs().BeingDragged then
+            GlorifiedHandcuffs.PlayerDragStopped( ent )
+        else
+            net.Start( "GlorifiedHandcuffs.InteractionMenu.OpenInteractionMenu" )
+            net.WriteEntity( ent )
+            net.Send( ply )
+        end
+        ply:GlorifiedHandcuffs().NextInteractionMenuUse = CurTime() + 2
+    end
+end )
+
+net.Receive( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer", function( len, ply )
+    local plyToDrag = net.ReadEntity()
+    if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToDrag ) == ply and not plyToDrag:GlorifiedHandcuffs().BeingDragged then
+        GlorifiedHandcuffs.PlayerDragPlayer( plyToDrag, ply )
+    end
+end )
 
 net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptStarted", function( len, ply )
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or not GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED then return end
