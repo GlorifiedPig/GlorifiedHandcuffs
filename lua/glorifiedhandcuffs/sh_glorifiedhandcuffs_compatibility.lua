@@ -31,8 +31,14 @@ function GlorifiedHandcuffs.HasGunLicense( ply )
 end
 
 if SERVER then
+    function GlorifiedHandcuffs.ArrestPlayer( ply, time, arrester )
+        GlorifiedHandcuffs.ResetAllHandcuffVars( ply )
+        ply:arrest( time, arrester )
+    end
+
     function GlorifiedHandcuffs.UnArrestPlayer( ply )
         if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+        GlorifiedHandcuffs.ResetAllHandcuffVars( ply )
         ply:unArrest()
     end
 

@@ -57,6 +57,9 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
 
         bailNPC3D2DBackground = Color( 55, 55, 55, 155 ),
         bailNPC3D2DText = Color( 255, 255, 255 ),
+
+        jailerNPC3D2DBackground = Color( 55, 55, 55, 155 ),
+        jailerNPC3D2DText = Color( 255, 255, 255 ),
     },
     Fonts = {
         ["HUD.Handcuffed"] = {
@@ -102,6 +105,12 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
             antialias = true
         },
         ["BailNPC.WordBox"] = {
+            font = "Roboto",
+            size = 50,
+            weight = 1000,
+            antialias = true
+        },
+        ["JailerNPC.WordBox"] = {
             font = "Roboto",
             size = 50,
             weight = 1000,

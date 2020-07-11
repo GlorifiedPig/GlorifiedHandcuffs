@@ -5,7 +5,7 @@ AddCSLuaFile( "shared.lua" )
 include( "shared.lua" )
 
 function ENT:Initialize()
-	self:SetModel( "models/Humans/Group02/Female_02.mdl" )
+	self:SetModel( "models/Humans/Group02/male_07.mdl" )
 	self:SetHullType( HULL_HUMAN )
 	self:SetHullSizeNormal()
 	self:SetNPCState( NPC_STATE_SCRIPT )
@@ -18,7 +18,7 @@ end
 
 function ENT:AcceptInput( name, ply, caller, data )
 	if name == "Use" then
-		GlorifiedHandcuffs.OpenBailMenu( ply )
+		GlorifiedHandcuffs.JailNearbyPlayers( ply, self )
 	end
 end
 

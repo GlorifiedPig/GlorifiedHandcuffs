@@ -123,3 +123,4 @@ if not GlorifiedPersistentEnts or GlorifiedPersistentEnts.Version < gpeVersion t
 end
 
 GlorifiedPersistentEnts.AddEntClassToTable( "glorifiedhandcuffs_bailnpc" )
+GlorifiedPersistentEnts.AddEntClassToTable( "glorifiedhandcuffs_jailernpc" )

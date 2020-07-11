@@ -65,6 +65,7 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         for k, v in pairs( boneManipPositions["handcuffed"] ) do
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
+        ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
     else
         ply:GlorifiedHandcuffs():SetHandcufferInternal( 0 )
         ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
@@ -73,8 +74,6 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
     ply:Freeze( handcuffed )
     ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
     ply:SetNWBool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
-
-    ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
 
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, handcuffed )
 end
@@ -102,6 +101,22 @@ end
 function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
     if not GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.GetPlayerHandcuffer( handcuffed ) != ply then return end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
+end
+
+function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
+    local playersJailed = 0
+    for k, v in pairs( ents.FindInSphere( jailerNPC:GetPos(), 1000 ) ) do
+        if v:IsPlayer() and GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == jailer and GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( jailer ) then
+            playersJailed = playersJailed + 1
+            GlorifiedHandcuffs.ArrestPlayer( v, GlorifiedHandcuffs.Config.JAILER_ARREST_TIME, jailer )
+        end
+    end
+
+    if playersJailed > 0 then
+        local arrestReward = playersJailed * GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD
+        GlorifiedHandcuffs.Notify( jailer, NOTIFY_GENERIC, 5, GlorifiedHandcuffs.i18n.GetPhrase( "playersJailed", playersJailed, GlorifiedHandcuffs.FormatMoney( arrestReward ) ) )
+        GlorifiedHandcuffs.AddPlayerMoney( jailer, arrestReward )
+    end
 end
 
 function GlorifiedHandcuffs.PlayerDragPlayer( ply, handcuffer )
@@ -161,6 +176,7 @@ hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnecte
     end
 end )
 
+hook.Add( "PlayerSpawn", "GlorifiedHandcuffs.PlayerMeta.PlayerSpawn", GlorifiedHandcuffs.ResetAllHandcuffVars )
 hook.Add( "PlayerDeath", "GlorifiedHandcuffs.PlayerMeta.PlayerDeath", GlorifiedHandcuffs.ResetAllHandcuffVars )
 hook.Add( "playerArrested", "GlorifiedHandcuffs.PlayerMeta.playerArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
 hook.Add( "playerUnArrested", "GlorifiedHandcuffs.PlayerMeta.playerUnArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
