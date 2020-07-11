@@ -20,7 +20,7 @@ end
 
 function PANEL:SetWeaponInfo( weapon )
     local weaponClass = weapon:GetClass()
-    self.WeaponLegal = GlorifiedHandcuffs.Config.LEGAL_WEAPONS[weaponClass] and GlorifiedHandcuffs.HasGunLicense( ply )
+    self.WeaponLegal = GlorifiedHandcuffs.Config.LEGAL_WEAPONS[weaponClass] and GlorifiedHandcuffs.HasGunLicense( weapon:GetOwner() )
     self.ModelPanel:SetModel( weapon:GetWeaponWorldModel() )
 
     self.ConfiscateButton:SetText( weapon:GetPrintName() )

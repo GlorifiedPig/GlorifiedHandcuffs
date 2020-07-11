@@ -42,14 +42,14 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
     end
 
     ply:Freeze( surrendering )
-    ply:GlorifiedHandcuffs():SetSurrenderingInternal( surrendering )
+    ply:GlorifiedHandcuffs().Surrendering = surrendering
     ply:SetNWBool( "GlorifiedHandcuffs.Surrendering", surrendering )
 
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, surrendering )
 end
 
 function GlorifiedHandcuffs.IsPlayerSurrendering( ply )
-    return ply:GlorifiedHandcuffs():GetSurrenderingInternal()
+    return ply:GlorifiedHandcuffs().Surrendering
 end
 
 function GlorifiedHandcuffs.TogglePlayerSurrendering( ply )
@@ -67,19 +67,19 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         end
         ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
     else
-        ply:GlorifiedHandcuffs():SetHandcufferInternal( 0 )
+        ply:GlorifiedHandcuffs().Handcuffer = 0
         ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
 
     ply:Freeze( handcuffed )
-    ply:GlorifiedHandcuffs():SetHandcuffedInternal( handcuffed )
+    ply:GlorifiedHandcuffs().Handcuffed = handcuffed
     ply:SetNWBool( "GlorifiedHandcuffs.Handcuffed", handcuffed )
 
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, handcuffed )
 end
 
 function GlorifiedHandcuffs.IsPlayerHandcuffed( ply )
-    return ply:GlorifiedHandcuffs():GetHandcuffedInternal()
+    return ply:GlorifiedHandcuffs().Handcuffed
 end
 
 function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
@@ -88,13 +88,13 @@ end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
     if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
-    handcuffed:GlorifiedHandcuffs():SetHandcufferInternal( ply:UserID() )
+    handcuffed:GlorifiedHandcuffs().Handcuffer = ply:UserID()
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
 end
 
 function GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
-    local handcufferID = ply:GlorifiedHandcuffs():GetHandcufferInternal()
+    local handcufferID = ply:GlorifiedHandcuffs().Handcuffer
     return handcufferID != nil and Player( handcufferID ) or 0
 end
 
@@ -178,10 +178,9 @@ hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnecte
     end
 end )
 
-hook.Add( "PlayerSpawn", "GlorifiedHandcuffs.PlayerMeta.PlayerSpawn", GlorifiedHandcuffs.ResetAllHandcuffVars )
-hook.Add( "PlayerDeath", "GlorifiedHandcuffs.PlayerMeta.PlayerDeath", GlorifiedHandcuffs.ResetAllHandcuffVars )
-hook.Add( "playerArrested", "GlorifiedHandcuffs.PlayerMeta.playerArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
-hook.Add( "playerUnArrested", "GlorifiedHandcuffs.PlayerMeta.playerUnArrested", GlorifiedHandcuffs.ResetAllHandcuffVars )
+for k, v in pairs( GlorifiedHandcuffs.ClearHandcuffVarsHooks ) do
+    hook.Add( v, "GlorifiedHandcuffs.PlayerMeta." .. v, GlorifiedHandcuffs.ResetAllHandcuffVars )
+end
 
 local plyMeta = FindMetaTable( "Player" )
 
@@ -198,10 +197,3 @@ function plyMeta:GlorifiedHandcuffs()
 
     return self.GlorifiedHandcuffs_Internal
 end
-
-function CLASS:SetSurrenderingInternal( surrendering ) self.Surrendering = surrendering return self end
-function CLASS:GetSurrenderingInternal() return self.Surrendering end
-function CLASS:SetHandcuffedInternal( handcuffed ) self.Handcuffed = handcuffed return self end
-function CLASS:GetHandcuffedInternal() return self.Handcuffed end
-function CLASS:SetHandcufferInternal( handcuffer ) self.Handcuffer = handcuffer return self end
-function CLASS:GetHandcufferInternal() return self.Handcuffer end

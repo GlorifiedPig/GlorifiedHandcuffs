@@ -1,5 +1,11 @@
 
 GlorifiedHandcuffs.HookRunName = "DarkRPFinishedLoading" -- Which hook should we start loading GlorifiedHandcuffs files in?
+GlorifiedHandcuffs.ClearHandcuffVarsHooks = {
+    "PlayerSpawn",
+    "PlayerDeath",
+    "playerArrested",
+    "playerUnArrested"
+}
 
 function GlorifiedHandcuffs.FormatMoney( money )
     return DarkRP.formatMoney( money )
