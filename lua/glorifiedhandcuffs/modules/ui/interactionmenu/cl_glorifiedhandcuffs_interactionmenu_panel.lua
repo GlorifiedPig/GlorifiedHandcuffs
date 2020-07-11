@@ -43,13 +43,13 @@ function PANEL:SetPlayer( ply )
     self.TitleBar = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.TitleBar", self )
 
     self.NameInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.NameInfoBox:SetLabelInfo( "Name", ply:Nick(), Color( 45, 45, 45 ), Color( 255, 255, 255 ) )
+    self.NameInfoBox:SetLabelInfo( "Name", ply:Nick(), Color( 45, 45, 45 ), Color( 255, 255, 255 ), self.Theme.Data.Materials.name )
 
     self.JobInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.JobInfoBox:SetLabelInfo( "Job", team.GetName( ply:Team() ), team.GetColor( ply:Team() ), Color( 255, 255, 255 ) )
+    self.JobInfoBox:SetLabelInfo( "Job", team.GetName( ply:Team() ), team.GetColor( ply:Team() ), Color( 255, 255, 255 ), self.Theme.Data.Materials.briefcase )
 
     self.WalletInfoBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.InfoBox", self )
-    self.WalletInfoBox:SetLabelInfo( "Wallet", GlorifiedHandcuffs.FormatMoney( GlorifiedHandcuffs.GetMoney( ply ) ), Color( 0, 165, 0 ), Color( 255, 255, 255 ) )
+    self.WalletInfoBox:SetLabelInfo( "Wallet", GlorifiedHandcuffs.FormatMoney( GlorifiedHandcuffs.GetMoney( ply ) ), Color( 0, 200, 0 ), Color( 255, 255, 255 ), self.Theme.Data.Materials.money )
 
     self.WeaponsBox = vgui.Create( "GlorifiedHandcuffs.InteractionMenu.WeaponsBox", self )
     for k, v in pairs( ply:GetWeapons() ) do

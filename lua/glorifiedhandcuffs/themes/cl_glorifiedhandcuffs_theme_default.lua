@@ -24,14 +24,14 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         interactionMenuInfoBoxBackgroundColor = Color( 85, 85, 85 ),
         interactionMenuInfoBoxTextColor = Color( 255, 255, 255 ),
         interactionMenuWeaponBackgroundColor = Color( 125, 125, 125 ),
-        interactionMenuDragPlayerButton = Color( 0, 165, 0 ),
-        interactionMenuDragPlayerButtonHover = Color( 0, 135, 0 ),
-        interactionMenuConfiscateIllegalWeaponsColor = Color( 165, 0, 0 ),
-        interactionMenuConfiscateIllegalWeaponsColorHover = Color( 135, 0, 0 ),
-        interactionMenuConfiscateWeaponColor = Color( 165, 0, 0 ),
-        interactionMenuConfiscateWeaponColorHover = Color( 135, 0, 0 ),
-        interactionMenuConfiscateWeaponColorLegal = Color( 0, 145, 0 ),
-        interactionMenuConfiscateWeaponColorLegalHover = Color( 0, 115, 0 ),
+        interactionMenuDragPlayerButton = Color( 200, 145, 45 ),
+        interactionMenuDragPlayerButtonHover = Color( 170, 125, 37 ),
+        interactionMenuConfiscateIllegalWeaponsColor = Color( 255, 60, 60 ),
+        interactionMenuConfiscateIllegalWeaponsColorHover = Color( 225, 35, 35 ),
+        interactionMenuConfiscateWeaponColor = Color( 200, 60, 60 ),
+        interactionMenuConfiscateWeaponColorHover = Color( 185, 25, 25 ),
+        interactionMenuConfiscateWeaponColorLegal = Color( 0, 200, 0 ),
+        interactionMenuConfiscateWeaponColorLegalHover = Color( 0, 180, 0 ),
 
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
         hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),
@@ -134,6 +134,9 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
         surrender = Material( "glorifiedhandcuffs/surrender.png", "noclamp smooth" ),
         close = Material( "glorifiedhandcuffs/close.png", "noclamp smooth" ),
+        name = Material( "glorifiedhandcuffs/name.png", "noclamp smooth" ),
+        money = Material( "glorifiedhandcuffs/money.png", "noclamp smooth" ),
+        briefcase = Material( "glorifiedhandcuffs/briefcase.png", "noclamp smooth" ),
     }
 } )
 GlorifiedHandcuffs.Themes.GenerateFonts()

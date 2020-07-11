@@ -4,6 +4,11 @@ local PANEL = {}
 function PANEL:Init()
     self.Theme = self:GetParent().Theme
 
+    self.LeftIcon = vgui.Create( "DImage", self )
+    self.LeftIcon:Dock( LEFT )
+    self.LeftIcon:SetSize( 32, 0 )
+    self.LeftIcon:DockMargin( 10, 12, 0, 16 )
+
     self.LeftLabel = vgui.Create( "DLabel", self )
     self.LeftLabel:SetFont( "GlorifiedHandcuffs.InteractionMenu.InfoBox" )
     self.LeftLabel:SetColor( self.Theme.Data.Colors.interactionMenuInfoBoxTextColor )
@@ -20,7 +25,9 @@ function PANEL:Paint( w, h )
     draw.RoundedBox( 6, 0, 0, w, h, self.Theme.Data.Colors.interactionMenuInfoBoxBackgroundColor )
 end
 
-function PANEL:SetLabelInfo( leftLabelName, rightLabelName, rightLabelColor, rightLabelTextColor )
+function PANEL:SetLabelInfo( leftLabelName, rightLabelName, rightLabelColor, rightLabelTextColor, iconMaterial )
+    self.LeftIcon:SetMaterial( iconMaterial )
+
     self.LeftLabel:SetText( leftLabelName )
     self.LeftLabel:SizeToContents()
 
