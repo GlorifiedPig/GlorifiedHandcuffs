@@ -148,6 +148,10 @@ function GlorifiedHandcuffs.PlayerDragStopped( ply )
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer" )
 end
 
+local function clampVector( vector, min, max )
+    return Vector( math.Clamp( vector.x, min, max ), math.Clamp( vector.y, min, max ), math.Clamp( vector.z, min, max ) )
+end
+
 function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
     local draggerPos = dragger:GetPos()
     local plyPos = ply:GetPos()
@@ -159,7 +163,7 @@ function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
             return
         end
         ply:SetEyeAngles( draggerAngle + Angle( -35, 0, 0 ) )
-        ply:SetVelocity( draggerPos - plyPos )
+        ply:SetVelocity( clampVector( draggerPos - plyPos, -100, 100 ) )
     end
 end
 
