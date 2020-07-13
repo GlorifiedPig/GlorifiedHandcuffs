@@ -1,33 +1,35 @@
 
-GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC = function( ply )
-    if not ply or isnumber( ply ) or not ply:IsValid() or not ply:IsPlayer() then return false end
-    return ply:isCP()
-end
+GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED = true -- Should the break free system be enabled?
+GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME = 0.04 -- What's the minimum time between clicks when breaking out?
+GlorifiedHandcuffs.Config.BREAK_FREE_EXPIRY_TIME = 0.11 -- What's the maximum time between clicks when breaking out?
+GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL = 100 -- How many clicks are required to break out?
+GlorifiedHandcuffs.Config.BREAK_FREE_WANTED = true -- Should we make the player wanted for breaking out?
+GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true -- Should we play a 3D sound when the player fails breaking out?
+GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav" -- See above.
 
-GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED = true
-GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME = 0.04
-GlorifiedHandcuffs.Config.BREAK_FREE_EXPIRY_TIME = 0.11
-GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL = 25
-GlorifiedHandcuffs.Config.BREAK_FREE_WANTED = true
-GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true
-GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav"
-
-GlorifiedHandcuffs.Config.JAILER_ARREST_TIME = 120
-GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100
+GlorifiedHandcuffs.Config.JAILER_ARREST_TIME = 120 -- How long will a player be arrested at the jailer for?
+GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100 -- How much will a cop get rewarded for an arrest?
 
 GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
 GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125
 GlorifiedHandcuffs.Config.TIME_TO_CUFF = 0.4 -- How many seconds must the player remain within distance to handcuff?
 
-GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500
+GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500 -- How much does it cost to bail someone out?
 
-GlorifiedHandcuffs.Config.BREAK_FREE_KEY = KEY_E
-GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME = "E"
-GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY = KEY_J
-GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J"
+GlorifiedHandcuffs.Config.BREAK_FREE_KEY = KEY_E -- The key to break free.
+GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME = "E" -- The string for the key that appears in the HUD.
+GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY = KEY_J -- The key to surrender.
+GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J" -- The string for the key that appears in the HUD.
 
-GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST = false
-GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = {
+GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST = { -- Which player models cannot be handcuffed?
+    ["example_model_here.mdl"] = true
+}
+GlorifiedHandcuffs.Config.TEAM_WHITELIST = { -- Which teams cannot be handcuffed?
+    [TEAM_CITIZEN] = false,
+}
+
+GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST = false -- Is the below blacklist a whitelist?
+GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = { -- Which weapons will not appear in the confiscate menu.
     ["keys"] = true,
     ["arrest_stick"] = true,
     ["door_ram"] = true,

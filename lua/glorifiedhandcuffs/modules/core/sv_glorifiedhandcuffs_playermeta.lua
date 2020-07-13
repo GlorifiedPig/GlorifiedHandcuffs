@@ -89,7 +89,8 @@ function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
 end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
-    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) then return end
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST[ply:GetModel()] or GlorifiedHandcuffs.Config.TEAM_WHITELIST[ply:Team()] then return end
+
     handcuffed:GlorifiedHandcuffs().Handcuffer = ply:UserID()
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, true )
@@ -110,7 +111,7 @@ end
 function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
     local playersJailed = 0
     for k, v in pairs( ents.FindInSphere( jailerNPC:GetPos(), 1000 ) ) do
-        if v:IsPlayer() and GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == jailer and GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( jailer ) then
+        if v:IsPlayer() and GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == jailer and GlorifiedHandcuffs.IsPlayerPolice( jailer ) then
             playersJailed = playersJailed + 1
             GlorifiedHandcuffs.ArrestPlayer( v, GlorifiedHandcuffs.Config.JAILER_ARREST_TIME, jailer )
         end

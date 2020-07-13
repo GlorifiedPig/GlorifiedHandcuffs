@@ -7,7 +7,7 @@
 
 GlorifiedHandcuffs = GlorifiedHandcuffs or {
     Config = {},
-    Version = "1.0.1"
+    Version = "1.1.0"
 }
 
 print( "[GlorifiedHandcuffs] This server is running version " .. GlorifiedHandcuffs.Version .. "." )
@@ -115,7 +115,7 @@ end
 hook.Add( GlorifiedHandcuffs.HookRunName, "GlorifiedHandcuffs.AutoIncluder.IncludeGBFiles", IncludeGBFiles )
 
 hook.Add( "libgmodstore_init", "GlorifiedHandcuffs.AutoIncluder.InitializeLibGModStore",function()
-    libgmodstore:InitScript( 0000, "GlorifiedHandcuffs",{
+    libgmodstore:InitScript( 7288, "GlorifiedHandcuffs",{
         version = "{{ script_version_name }}",
         licensee = "{{ user_id }}"
     } )

@@ -7,6 +7,11 @@ GlorifiedHandcuffs.ClearHandcuffVarsHooks = {
     "playerUnArrested"
 }
 
+function GlorifiedHandcuffs.IsPlayerPolice( ply )
+    if not ply or isnumber( ply ) or not ply:IsValid() or not ply:IsPlayer() then return false end
+    return ply:isCP()
+end
+
 function GlorifiedHandcuffs.FormatMoney( money )
     return DarkRP.formatMoney( money )
 end

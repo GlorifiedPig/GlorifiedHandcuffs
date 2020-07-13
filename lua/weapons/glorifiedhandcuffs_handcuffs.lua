@@ -55,7 +55,7 @@ function SWEP:PrimaryAttack()
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
     if GlorifiedHandcuffs.IsPlayerHandcuffed( tr.Entity ) then return end
-    if not GlorifiedHandcuffs.Config.PLAYER_ISPOLICE_CUSTOMFUNC( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) then return end
+    if not GlorifiedHandcuffs.IsPlayerPolice( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) then return end
 
     self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
 
