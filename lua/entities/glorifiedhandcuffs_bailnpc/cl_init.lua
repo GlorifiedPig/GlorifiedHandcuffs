@@ -3,13 +3,16 @@ include( "shared.lua" )
 
 local theme = GlorifiedHandcuffs.Themes.GetCurrent()
 local bailNPCText = GlorifiedHandcuffs.i18n.GetPhrase( "bailNpc" )
+local ply
 
 function ENT:Draw()
     self:DrawModel()
+    if not ply then ply = LocalPlayer() end
 
     local pos = self:GetPos()
-    local angles = self:GetAngles()
+    if ply:GetPos():DistToSqr( pos ) >= 500000 then return end
 
+    local angles = self:GetAngles()
     angles:RotateAroundAxis( angles:Forward(), 90 )
     angles:RotateAroundAxis( angles:Right(), 270 )
 
