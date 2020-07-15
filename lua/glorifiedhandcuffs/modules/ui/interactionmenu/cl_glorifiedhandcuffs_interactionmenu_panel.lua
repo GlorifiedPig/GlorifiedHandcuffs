@@ -60,7 +60,7 @@ function PANEL:SetPlayer( ply )
     self.ConfiscateAllButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.ConfiscateAllButton:Dock( LEFT )
     self.ConfiscateAllButton:SetTextColor( self.Theme.Data.Colors.interactionMenuTopRowButtonsTextColor )
-    self.ConfiscateAllButton:SetText( "Confiscate All" )
+    self.ConfiscateAllButton:SetText( GlorifiedHandcuffs.IsPlayerPolice( LocalPlayer() ) and GlorifiedHandcuffs.i18n.GetPhrase( "confiscateAll" ) or GlorifiedHandcuffs.i18n.GetPhrase( "takeAll" ) )
     local confiscateAllColor = self.Theme.Data.Colors.interactionMenuTopRowButtonsButton
     local confiscateAllColorLerped = confiscateAllColor
     self.ConfiscateAllButton.Paint = function( confiscateAllButton, w, h )
@@ -72,7 +72,7 @@ function PANEL:SetPlayer( ply )
     self.ConfiscateIllegalButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.ConfiscateIllegalButton:Dock( LEFT )
     self.ConfiscateIllegalButton:SetTextColor( self.Theme.Data.Colors.interactionMenuTopRowButtonsTextColor )
-    self.ConfiscateIllegalButton:SetText( "Confiscate Illegal" )
+    self.ConfiscateIllegalButton:SetText( GlorifiedHandcuffs.IsPlayerPolice( LocalPlayer() ) and GlorifiedHandcuffs.i18n.GetPhrase( "confiscateIllegal" ) or GlorifiedHandcuffs.i18n.GetPhrase( "takeIllegal" ) )
     local confiscateIllegalColor = self.Theme.Data.Colors.interactionMenuTopRowButtonsButton
     local confiscateIllegalColorLerped = confiscateIllegalColor
     self.ConfiscateIllegalButton.Paint = function( confiscateIllegalButton, w, h )
@@ -106,7 +106,7 @@ function PANEL:SetPlayer( ply )
     self.BlindfoldButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.BlindfoldButton:Dock( LEFT )
     self.BlindfoldButton:SetTextColor( self.Theme.Data.Colors.interactionMenuBottomRowButtonsTextColor )
-    self.BlindfoldButton:SetText( "Blindfold Player" )
+    self.BlindfoldButton:SetText( GlorifiedHandcuffs.IsPlayerBlindfolded( ply ) and GlorifiedHandcuffs.i18n.GetPhrase( "removeBlindfold" ) or GlorifiedHandcuffs.i18n.GetPhrase( "blindfoldPlayer" ) )
     local blindfoldButtonColor = self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton
     local blindfoldButtonColorLerped = blindfoldButtonColor
     self.BlindfoldButton.Paint = function( blindfoldButton, w, h )
@@ -118,7 +118,7 @@ function PANEL:SetPlayer( ply )
     self.GagButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.GagButton:Dock( LEFT )
     self.GagButton:SetTextColor( self.Theme.Data.Colors.interactionMenuBottomRowButtonsTextColor )
-    self.GagButton:SetText( "Gag Player" )
+    self.GagButton:SetText( GlorifiedHandcuffs.IsPlayerGagged( ply ) and GlorifiedHandcuffs.i18n.GetPhrase( "removeGag" ) or GlorifiedHandcuffs.i18n.GetPhrase( "gagPlayer" ) )
     local gagButtonColor = self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton
     local gagButtonColorLerped = gagButtonColor
     self.GagButton.Paint = function( gagButton, w, h )
