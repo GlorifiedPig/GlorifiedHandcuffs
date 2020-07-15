@@ -37,7 +37,7 @@ function PANEL:SetWeaponInfo( weapon )
         self.ConfiscateButton:SetText( GlorifiedHandcuffs.i18n.GetPhrase( "confiscate" ) )
     end
     self.ConfiscateButton.OnCursorExited = function()
-        if not weapon then return end
+        if not weapon or not weapon:IsValid() then return end
         self.ConfiscateButton:SetText( weapon:GetPrintName() )
     end
     self.ConfiscateButton.DoClick = function()

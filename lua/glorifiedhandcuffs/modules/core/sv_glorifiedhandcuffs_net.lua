@@ -1,6 +1,7 @@
 
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.OpenInteractionMenu" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer" )
+util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripAllWeapons" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripIllegalWeapons" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripWeapon" )
 util.AddNetworkString( "GlorifiedHandcuffs.BreakFree.AttemptStarted" )
@@ -29,10 +30,17 @@ net.Receive( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer", function(
     end
 end )
 
+net.Receive( "GlorifiedHandcuffs.InteractionMenu.StripAllWeapons", function( len, ply )
+    local plyToStrip = net.ReadEntity()
+    if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToStrip ) == ply then
+        GlorifiedHandcuffs.StripAllWeapons( plyToStrip, not GlorifiedHandcuffs.IsPlayerPolice( ply ), ply )
+    end
+end )
+
 net.Receive( "GlorifiedHandcuffs.InteractionMenu.StripIllegalWeapons", function( len, ply )
     local plyToStrip = net.ReadEntity()
     if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToStrip ) == ply then
-        GlorifiedHandcuffs.StripAllIllegalWeapons( plyToStrip )
+        GlorifiedHandcuffs.StripAllIllegalWeapons( plyToStrip, not GlorifiedHandcuffs.IsPlayerPolice( ply ), ply )
     end
 end )
 
@@ -41,6 +49,9 @@ net.Receive( "GlorifiedHandcuffs.InteractionMenu.StripWeapon", function( len, pl
     local weaponToStrip = net.ReadString()
     if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToStrip ) == ply then
         plyToStrip:StripWeapon( weaponToStrip )
+        if not GlorifiedHandcuffs.IsPlayerPolice( ply ) then
+            ply:Give( weaponToStrip )
+        end
     end
 end )
 
