@@ -221,6 +221,10 @@ hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapo
     if newWeapon:GetClass() != GlorifiedHandcuffs.Config.HANDS_SWEP_NAME and ( GlorifiedHandcuffs.IsPlayerSurrendering( ply ) or GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) ) then return true end
 end )
 
+hook.Add( "PlayerCanHearPlayersVoice", "GlorifiedHandcuffs.PlayerMeta.PlayerCanHearPlayersVoice", function( listener, ply )
+    if GlorifiedHandcuffs.IsPlayerGagged( ply ) then return false end
+end )
+
 hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )
     for k, v in pairs( player.GetAll() ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then

@@ -1,6 +1,8 @@
 
 GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     cuffed = "You are cuffed",
+    blindfolded = "You are blindfolded",
+    gagged = "You are gagged",
     hitToFree = "Spam  %s  to break free",
     brokenFreeWanted = "Escaped from custody",
     bailMenu = "Bail Menu",
@@ -23,5 +25,5 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     removeBlindfold = "Remove Blindfold",
     gagPlayer = "Gag Player",
     removeGag = "Remove Gag",
-    confiscate = "Confiscate"
+    confiscate = "Confiscate",
 } )
