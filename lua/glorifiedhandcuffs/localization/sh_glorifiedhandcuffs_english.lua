@@ -14,7 +14,14 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "en", {
     name = "Name",
     job = "Job",
     wallet = "Wallet",
+    confiscateAll = "Confiscate All",
+    confiscateIllegal = "Confiscate Illegal",
+    takeAll = "Take All",
+    takeIllegal = "Take Illegal",
     dragPlayer = "Drag Player",
-    confiscateIllegalWeapons = "Confiscate Illegal Weapons",
+    blindfoldPlayer = "Blindfold Player",
+    removeBlindfold = "Remove Blindfold",
+    gagPlayer = "Gag Player",
+    removeGag = "Remove Gag",
     confiscate = "Confiscate"
 } )

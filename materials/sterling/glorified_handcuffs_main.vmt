@@ -1,0 +1,15 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "sterling/glorified_handcuffs_main"
+	"$bumpmap" "sterling/glorified_handcuffs_norm"
+
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" "1"
+	"$envmaptint" "[.05 .05 .05]"	
+	"$envmapfresnel" "1"
+
+	"$phong" "1"
+	"$phongboost" "6"
+	"$phongexponent" "8"
+	"$phongfresnelranges"  "[0.1 0.1 0.1]"
+}

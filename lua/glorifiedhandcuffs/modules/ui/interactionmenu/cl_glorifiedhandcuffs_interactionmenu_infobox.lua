@@ -4,10 +4,13 @@ local PANEL = {}
 function PANEL:Init()
     self.Theme = self:GetParent().Theme
 
-    self.LeftIcon = vgui.Create( "DImage", self )
-    self.LeftIcon:Dock( LEFT )
-    self.LeftIcon:SetSize( 32, 0 )
-    self.LeftIcon:DockMargin( 10, 12, 0, 16 )
+    self.LeftIconPanel = vgui.Create( "EditablePanel", self )
+    self.LeftIconPanel:Dock( LEFT )
+    self.LeftIconPanel:SetSize( 48, 0 )
+
+    self.LeftIcon = vgui.Create( "DImage", self.LeftIconPanel )
+    self.LeftIcon:SetSize( 36, 36 )
+    self.LeftIcon:SetPos( 10, self:GetTall() / 2 )
 
     self.LeftLabel = vgui.Create( "DLabel", self )
     self.LeftLabel:SetFont( "GlorifiedHandcuffs.InteractionMenu.InfoBox" )
@@ -19,6 +22,10 @@ function PANEL:Init()
     self.RightLabel:SetFont( "GlorifiedHandcuffs.InteractionMenu.InfoBoxInfo" )
     self.RightLabel:DockMargin( 0, 0, 10, 0 )
     self.RightLabel:Dock( RIGHT )
+end
+
+function PANEL:PerformLayout( w, h )
+    self.LeftIcon:SetPos( 10, h / 2 - self.LeftIcon:GetTall() / 2 - 2 )
 end
 
 function PANEL:Paint( w, h )

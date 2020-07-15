@@ -4,6 +4,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         scrollBarCol = Color( 105, 105, 105 ),
         scrollBarHoverCol = Color( 85, 85, 85 ),
 
+
         bailMenuBackgroundColor = Color( 51, 51, 51 ),
         bailMenuTitleBarBackgroundColor = Color( 34, 34, 34 ),
         bailMenuCloseButtonBackgroundColor = Color( 201, 60, 63 ),
@@ -17,29 +18,34 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         bailMenuBailButtonColorCantAfford = Color( 201, 60, 63 ),
         bailMenuBailButtonColorCantAffordHover = Color( 156, 40, 42 ),
 
+
         interactionMenuBackgroundColor = Color( 51, 51, 51 ),
         interactionMenuTitleBarBackgroundColor = Color( 34, 34, 34 ),
         interactionMenuCloseButtonBackgroundColor = Color( 201, 60, 63 ),
         interactionMenuCloseButtonHoverColor = Color( 134, 35, 37 ),
+
         interactionMenuInfoBoxBackgroundColor = Color( 85, 85, 85 ),
         interactionMenuInfoBoxTextColor = Color( 255, 255, 255 ),
         interactionMenuInfoBoxNameColor = Color( 45, 45, 45 ),
         interactionMenuInfoBoxNameTextColor = Color( 255, 255, 255 ),
         interactionMenuInfoBoxJobTextColor = Color( 255, 255, 255 ),
-        interactionMenuInfoBoxWalletColor = Color( 0, 200, 0 ),
+        interactionMenuInfoBoxWalletColor = Color( 0, 185, 0 ),
         interactionMenuInfoBoxWalletTextColor = Color( 255, 255, 255 ),
+
+        interactionMenuTopRowButtonsTextColor = Color( 255, 255, 255 ),
+        interactionMenuTopRowButtonsButton = Color( 230, 56, 56 ),
+        interactionMenuTopRowButtonsButtonHover = Color( 175, 43, 43 ),
+        interactionMenuBottomRowButtonsTextColor = Color( 255, 255, 255 ),
+        interactionMenuBottomRowButtonsButton = Color( 126, 126, 126 ),
+        interactionMenuBottomRowButtonsButtonHover = Color( 91, 91, 91 ),
+
         interactionMenuWeaponBackgroundColor = Color( 125, 125, 125 ),
-        interactionMenuDragPlayerTextColor = Color( 255, 255, 255 ),
-        interactionMenuDragPlayerButton = Color( 200, 145, 45 ),
-        interactionMenuDragPlayerButtonHover = Color( 170, 125, 37 ),
-        interactionMenuConfiscateIllegalWeaponsTextColor = Color( 255, 255, 255 ),
-        interactionMenuConfiscateIllegalWeaponsColor = Color( 255, 60, 60 ),
-        interactionMenuConfiscateIllegalWeaponsColorHover = Color( 225, 35, 35 ),
         interactionMenuConfiscateWeaponTextColor = Color( 255, 255, 255 ),
         interactionMenuConfiscateWeaponColor = Color( 200, 60, 60 ),
         interactionMenuConfiscateWeaponColorHover = Color( 185, 25, 25 ),
-        interactionMenuConfiscateWeaponColorLegal = Color( 0, 200, 0 ),
-        interactionMenuConfiscateWeaponColorLegalHover = Color( 0, 180, 0 ),
+        interactionMenuConfiscateWeaponColorLegal = Color( 0, 185, 0 ),
+        interactionMenuConfiscateWeaponColorLegalHover = Color( 0, 185, 0 ),
+
 
         hudCuffedBackgroundColor = Color( 210, 80, 80 ),
         hudCuffedBackgroundTextColor = Color( 255, 255, 255 ),
@@ -54,6 +60,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
         hudStopSurrenderingBackgroundTextColor = Color( 255, 255, 255 ),
         hudStopSurrenderingKeypressBackgroundColor = Color( 102, 176, 64 ),
         hudStopSurrenderingKeypressTextColor = Color( 255, 255, 255 ),
+
 
         bailNPC3D2DBackground = Color( 55, 55, 55, 155 ),
         bailNPC3D2DText = Color( 255, 255, 255 ),
