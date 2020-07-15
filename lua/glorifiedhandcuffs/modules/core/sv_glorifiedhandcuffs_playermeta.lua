@@ -68,6 +68,8 @@ function GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, handcuffed )
         end
         ply:EmitSound( GlorifiedHandcuffs.Config.HANDCUFF_SOUND_EFFECT, 100, 255 )
     else
+        GlorifiedHandcuffs.SetPlayerBlindfoldedStatus( ply, false )
+        GlorifiedHandcuffs.SetPlayerGaggedStatus( ply, false )
         ply:GlorifiedHandcuffs().Handcuffer = 0
         ply:SetNWInt( "GlorifiedHandcuffs.Handcuffer", 0 )
     end
@@ -86,6 +88,34 @@ end
 
 function GlorifiedHandcuffs.TogglePlayerHandcuffed( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) )
+end
+
+function GlorifiedHandcuffs.SetPlayerBlindfoldedStatus( ply, blindfolded )
+    if not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return end
+    ply:SetNWBool( "GlorifiedHandcuffs.Blindfolded", blindfolded )
+    ply:GlorifiedHandcuffs().Blindfolded = blindfolded
+end
+
+function GlorifiedHandcuffs.IsPlayerBlindfolded( ply )
+    return ply:GlorifiedHandcuffs().Blindfolded
+end
+
+function GlorifiedHandcuffs.TogglePlayerBlindfolded( ply )
+    GlorifiedHandcuffs.SetPlayerBlindfoldedStatus( ply, not GlorifiedHandcuffs.IsPlayerBlindfolded( ply ) )
+end
+
+function GlorifiedHandcuffs.SetPlayerGaggedStatus( ply, gagged )
+    if not GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return end
+    ply:SetNWBool( "GlorifiedHandcuffs.Gagged", gagged )
+    ply:GlorifiedHandcuffs().Gagged = gagged
+end
+
+function GlorifiedHandcuffs.IsPlayerGagged( ply )
+    return ply:GlorifiedHandcuffs().Gagged
+end
+
+function GlorifiedHandcuffs.TogglePlayerGagged( ply )
+    GlorifiedHandcuffs.SetPlayerGaggedStatus( ply, not GlorifiedHandcuffs.IsPlayerGagged( ply ) )
 end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
@@ -183,6 +213,8 @@ function GlorifiedHandcuffs.ResetAllHandcuffVars( ply )
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, false )
     GlorifiedHandcuffs.PlayerDragStopped( ply )
     GlorifiedHandcuffs.SetPlayerHasRestrainedWeapon( ply, false )
+    GlorifiedHandcuffs.SetPlayerBlindfoldedStatus( ply, false )
+    GlorifiedHandcuffs.SetPlayerGaggedStatus( ply, false )
 end
 
 hook.Add( "PlayerSwitchWeapon", "GlorifiedHandcuffs.PlayerMeta.PlayerSwitchWeapon", function( ply, oldWeapon, newWeapon )
