@@ -67,6 +67,12 @@ function PANEL:SetPlayer( ply )
         confiscateAllColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, confiscateAllColorLerped, confiscateAllButton:IsHovered() and self.Theme.Data.Colors.interactionMenuTopRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuTopRowButtonsButton )
         draw.RoundedBox( 0, 0, 0, w - 2, h, confiscateAllColorLerped )
     end
+    self.ConfiscateAllButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StripAllWeapons" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
+    end
 
     self.ConfiscateIllegalButton = vgui.Create( "DButton", self.TopRowButtons )
     self.ConfiscateIllegalButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
@@ -78,6 +84,12 @@ function PANEL:SetPlayer( ply )
     self.ConfiscateIllegalButton.Paint = function( confiscateIllegalButton, w, h )
         confiscateIllegalColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, confiscateIllegalColorLerped, confiscateIllegalButton:IsHovered() and self.Theme.Data.Colors.interactionMenuTopRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuTopRowButtonsButton )
         draw.RoundedBox( 0, 2, 0, w - 2, h, confiscateIllegalColorLerped )
+    end
+    self.ConfiscateIllegalButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StripIllegalWeapons" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
     end
 
     self.BottomRowButtons = vgui.Create( "EditablePanel", self )
@@ -101,6 +113,12 @@ function PANEL:SetPlayer( ply )
         dragButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, dragButtonColorLerped, dragButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
         draw.RoundedBox( 0, 0, 0, w, h, dragButtonColorLerped )
     end
+    self.DragButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
+    end
 
     self.BlindfoldButton = vgui.Create( "DButton", self.BottomRowButtons )
     self.BlindfoldButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
@@ -113,6 +131,12 @@ function PANEL:SetPlayer( ply )
         blindfoldButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, blindfoldButtonColorLerped, blindfoldButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
         draw.RoundedBox( 0, 4, 0, w - 2, h, blindfoldButtonColorLerped )
     end
+    self.BlindfoldButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerBlindfold" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
+    end
 
     self.GagButton = vgui.Create( "DButton", self.BottomRowButtons )
     self.GagButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
@@ -124,6 +148,12 @@ function PANEL:SetPlayer( ply )
     self.GagButton.Paint = function( gagButton, w, h )
         gagButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, gagButtonColorLerped, gagButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
         draw.RoundedBox( 0, 4, 0, w - 2, h, gagButtonColorLerped )
+    end
+    self.GagButton.DoClick = function()
+        net.Start( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerGagged" )
+        net.WriteEntity( ply )
+        net.SendToServer()
+        GlorifiedHandcuffs.UI.CloseInteractionMenu()
     end
 
     self:SetAlpha( 0 )

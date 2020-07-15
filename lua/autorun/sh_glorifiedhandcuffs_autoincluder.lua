@@ -7,7 +7,7 @@
 
 GlorifiedHandcuffs = GlorifiedHandcuffs or {
     Config = {},
-    Version = "1.1.2"
+    Version = "1.2.0"
 }
 
 print( "[GlorifiedHandcuffs] This server is running version " .. GlorifiedHandcuffs.Version .. "." )

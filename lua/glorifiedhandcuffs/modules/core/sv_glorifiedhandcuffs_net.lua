@@ -1,6 +1,8 @@
 
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.OpenInteractionMenu" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer" )
+util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerBlindfold" )
+util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerGagged" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripAllWeapons" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripIllegalWeapons" )
 util.AddNetworkString( "GlorifiedHandcuffs.InteractionMenu.StripWeapon" )
@@ -19,7 +21,7 @@ hook.Add( "PlayerUse", "GlorifiedHandcuffs.InteractionMenu.PlayerUse", function(
             net.WriteEntity( ent )
             net.Send( ply )
         end
-        ply:GlorifiedHandcuffs().NextInteractionMenuUse = CurTime() + 2
+        ply:GlorifiedHandcuffs().NextInteractionMenuUse = CurTime() + 0.75
     end
 end )
 
@@ -27,6 +29,20 @@ net.Receive( "GlorifiedHandcuffs.InteractionMenu.StartDraggingPlayer", function(
     local plyToDrag = net.ReadEntity()
     if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToDrag ) == ply and not plyToDrag:GlorifiedHandcuffs().BeingDragged then
         GlorifiedHandcuffs.PlayerDragPlayer( plyToDrag, ply )
+    end
+end )
+
+net.Receive( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerBlindfold", function( len, ply )
+    local plyToBlindfold = net.ReadEntity()
+    if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToBlindfold ) == ply then
+        GlorifiedHandcuffs.TogglePlayerBlindfolded( plyToBlindfold )
+    end
+end )
+
+net.Receive( "GlorifiedHandcuffs.InteractionMenu.TogglePlayerGagged", function( len, ply )
+    local plyToGag = net.ReadEntity()
+    if GlorifiedHandcuffs.GetPlayerHandcuffer( plyToGag ) == ply then
+        GlorifiedHandcuffs.TogglePlayerGagged( plyToGag )
     end
 end )
 
