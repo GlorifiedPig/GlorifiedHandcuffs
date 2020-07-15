@@ -34,10 +34,10 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
 
         interactionMenuTopRowButtonsTextColor = Color( 255, 255, 255 ),
         interactionMenuTopRowButtonsButton = Color( 230, 56, 56 ),
-        interactionMenuTopRowButtonsButtonHover = Color( 175, 43, 43 ),
+        interactionMenuTopRowButtonsButtonHover = Color( 185, 48, 48 ),
         interactionMenuBottomRowButtonsTextColor = Color( 255, 255, 255 ),
         interactionMenuBottomRowButtonsButton = Color( 126, 126, 126 ),
-        interactionMenuBottomRowButtonsButtonHover = Color( 91, 91, 91 ),
+        interactionMenuBottomRowButtonsButtonHover = Color( 100, 100, 100 ),
 
         interactionMenuWeaponBackgroundColor = Color( 125, 125, 125 ),
         interactionMenuConfiscateWeaponTextColor = Color( 255, 255, 255 ),

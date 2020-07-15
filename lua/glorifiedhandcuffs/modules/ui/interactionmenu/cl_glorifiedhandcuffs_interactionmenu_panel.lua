@@ -59,19 +59,25 @@ function PANEL:SetPlayer( ply )
     self.ConfiscateAllButton = vgui.Create( "DButton", self.TopRowButtons )
     self.ConfiscateAllButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.ConfiscateAllButton:Dock( LEFT )
-    self.ConfiscateAllButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.ConfiscateAllButton:SetTextColor( self.Theme.Data.Colors.interactionMenuTopRowButtonsTextColor )
     self.ConfiscateAllButton:SetText( "Confiscate All" )
+    local confiscateAllColor = self.Theme.Data.Colors.interactionMenuTopRowButtonsButton
+    local confiscateAllColorLerped = confiscateAllColor
     self.ConfiscateAllButton.Paint = function( confiscateAllButton, w, h )
-        draw.RoundedBox( 0, 0, 0, w - 2, h, Color( 230, 56, 56 ) )
+        confiscateAllColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, confiscateAllColorLerped, confiscateAllButton:IsHovered() and self.Theme.Data.Colors.interactionMenuTopRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuTopRowButtonsButton )
+        draw.RoundedBox( 0, 0, 0, w - 2, h, confiscateAllColorLerped )
     end
 
     self.ConfiscateIllegalButton = vgui.Create( "DButton", self.TopRowButtons )
     self.ConfiscateIllegalButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.ConfiscateIllegalButton:Dock( LEFT )
-    self.ConfiscateIllegalButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.ConfiscateIllegalButton:SetTextColor( self.Theme.Data.Colors.interactionMenuTopRowButtonsTextColor )
     self.ConfiscateIllegalButton:SetText( "Confiscate Illegal" )
+    local confiscateIllegalColor = self.Theme.Data.Colors.interactionMenuTopRowButtonsButton
+    local confiscateIllegalColorLerped = confiscateIllegalColor
     self.ConfiscateIllegalButton.Paint = function( confiscateIllegalButton, w, h )
-        draw.RoundedBox( 0, 2, 0, w - 2, h, Color( 230, 56, 56 ) )
+        confiscateIllegalColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, confiscateIllegalColorLerped, confiscateIllegalButton:IsHovered() and self.Theme.Data.Colors.interactionMenuTopRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuTopRowButtonsButton )
+        draw.RoundedBox( 0, 2, 0, w - 2, h, confiscateIllegalColorLerped )
     end
 
     self.BottomRowButtons = vgui.Create( "EditablePanel", self )
@@ -87,28 +93,37 @@ function PANEL:SetPlayer( ply )
     self.DragButton = vgui.Create( "DButton", self.BottomRowButtons )
     self.DragButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.DragButton:Dock( LEFT )
-    self.DragButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.DragButton:SetTextColor( self.Theme.Data.Colors.interactionMenuBottomRowButtonsTextColor )
     self.DragButton:SetText( "Drag Player" )
+    local dragButtonColor = self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton
+    local dragButtonColorLerped = dragButtonColor
     self.DragButton.Paint = function( dragButton, w, h )
-        draw.RoundedBox( 0, 0, 0, w, h, Color( 126, 126, 126 ) )
+        dragButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, dragButtonColorLerped, dragButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
+        draw.RoundedBox( 0, 0, 0, w, h, dragButtonColorLerped )
     end
 
     self.BlindfoldButton = vgui.Create( "DButton", self.BottomRowButtons )
     self.BlindfoldButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.BlindfoldButton:Dock( LEFT )
-    self.BlindfoldButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.BlindfoldButton:SetTextColor( self.Theme.Data.Colors.interactionMenuBottomRowButtonsTextColor )
     self.BlindfoldButton:SetText( "Blindfold Player" )
+    local blindfoldButtonColor = self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton
+    local blindfoldButtonColorLerped = blindfoldButtonColor
     self.BlindfoldButton.Paint = function( blindfoldButton, w, h )
-        draw.RoundedBox( 0, 4, 0, w - 2, h, Color( 126, 126, 126 ) )
+        blindfoldButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, blindfoldButtonColorLerped, blindfoldButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
+        draw.RoundedBox( 0, 4, 0, w - 2, h, blindfoldButtonColorLerped )
     end
 
     self.GagButton = vgui.Create( "DButton", self.BottomRowButtons )
     self.GagButton:SetFont( "GlorifiedHandcuffs.InteractionMenu.BottomButtons" )
     self.GagButton:Dock( LEFT )
-    self.GagButton:SetTextColor( Color( 255, 255, 255 ) )
+    self.GagButton:SetTextColor( self.Theme.Data.Colors.interactionMenuBottomRowButtonsTextColor )
     self.GagButton:SetText( "Gag Player" )
+    local gagButtonColor = self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton
+    local gagButtonColorLerped = gagButtonColor
     self.GagButton.Paint = function( gagButton, w, h )
-        draw.RoundedBox( 0, 4, 0, w - 2, h, Color( 126, 126, 126 ) )
+        gagButtonColorLerped = GlorifiedHandcuffs.UI.LerpColor( FrameTime() * 4, gagButtonColorLerped, gagButton:IsHovered() and self.Theme.Data.Colors.interactionMenuBottomRowButtonsButtonHover or self.Theme.Data.Colors.interactionMenuBottomRowButtonsButton )
+        draw.RoundedBox( 0, 4, 0, w - 2, h, gagButtonColorLerped )
     end
 
     self:SetAlpha( 0 )
