@@ -71,7 +71,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     Fonts = {
         ["HUD.Handcuffed"] = {
             font = "Roboto",
-            size = 20,
+            size = 21,
             weight = 1000,
             antialias = true
         },
@@ -156,6 +156,7 @@ GlorifiedHandcuffs.Themes.Register( "Default", "Default", {
     },
     Materials = {
         cuffs = Material( "glorifiedhandcuffs/cuffs.png", "noclamp smooth" ),
+        cuffs_blindfolded = Material( "glorifiedhandcuffs/cuffs_blindfolded.png", "noclamp smooth" ),
         surrender = Material( "glorifiedhandcuffs/surrender.png", "noclamp smooth" ),
         close = Material( "glorifiedhandcuffs/close.png", "noclamp smooth" ),
         name = Material( "glorifiedhandcuffs/name.png", "noclamp smooth" ),
