@@ -57,6 +57,7 @@ GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = { -- Which weapons will not appear 
     ["glorifiedhandcuffs_restrained"] = true,
     ["glorifiedhandcuffs_handcuffs"] = true,
     ["glorifiedhandcuffs_nightstick"] = true,
+    ["glorifiedbanking_card"] = true,
 }
 GlorifiedHandcuffs.Config.LEGAL_WEAPONS = { -- Weapons that are legal with a gun license.
     ["weapon_glock2"] = true,
