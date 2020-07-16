@@ -10,6 +10,9 @@ hook.Add( "PlayerButtonDown", "GlorifiedHandcuffs.BreakFree.PlayerButtonDown", f
         if GlorifiedHandcuffs.BreakFreeTotal >= GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL then
             net.Start( "GlorifiedHandcuffs.BreakFree.AttemptSuccess" )
             net.SendToServer()
+            timer.Simple( LocalPlayer():Ping() / 1000, function()
+                GlorifiedHandcuffs.BreakFreeTotal = 0 -- We need to do this synced with the player's ping, otherwise the lagg will make it difficult to suceed.
+            end )
             return
         end
 
