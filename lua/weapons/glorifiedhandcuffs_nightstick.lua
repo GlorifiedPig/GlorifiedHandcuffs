@@ -60,7 +60,9 @@ function SWEP:PrimaryAttack()
             if not trEntity:IsFrozen() then
                 trEntity:Freeze( true )
                 timer.Simple( GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_TIME, function()
-                    if trEntity then trEntity:Freeze( false ) end
+                    if trEntity and not GlorifiedHandcuffs.IsPlayerSurrendering( trEntity ) and not GlorifiedHandcuffs.IsPlayerHandcuffed( trEntity ) then
+                        trEntity:Freeze( false )
+                    end
                 end )
             end
         end

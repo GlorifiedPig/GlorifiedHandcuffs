@@ -10,7 +10,6 @@ hook.Add( "PlayerButtonDown", "GlorifiedHandcuffs.BreakFree.PlayerButtonDown", f
         if GlorifiedHandcuffs.BreakFreeTotal >= GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL then
             net.Start( "GlorifiedHandcuffs.BreakFree.AttemptSuccess" )
             net.SendToServer()
-            GlorifiedHandcuffs.BreakFreeTotal = 0
             return
         end
 
@@ -20,9 +19,11 @@ hook.Add( "PlayerButtonDown", "GlorifiedHandcuffs.BreakFree.PlayerButtonDown", f
             net.Start( "GlorifiedHandcuffs.BreakFree.AttemptStarted" )
             net.SendToServer()
             timer.Create( "GlorifiedHandcuffs.BreakFreeTimer", GlorifiedHandcuffs.Config.BREAK_FREE_EXPIRY_TIME, 1, function()
-                net.Start( "GlorifiedHandcuffs.BreakFree.AttemptFailed" )
-                net.SendToServer()
-                GlorifiedHandcuffs.BreakFreeTotal = 0
+                if GlorifiedHandcuffs.BreakFreeTotal / GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL < GlorifiedHandcuffs.Config.BREAK_FREE_CUTOFF then
+                    net.Start( "GlorifiedHandcuffs.BreakFree.AttemptFailed" )
+                    net.SendToServer()
+                    GlorifiedHandcuffs.BreakFreeTotal = 0
+                end
             end )
         end
     end

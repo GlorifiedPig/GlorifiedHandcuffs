@@ -201,7 +201,7 @@ end
 function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
     local draggerPos = dragger:GetPos()
     local plyPos = ply:GetPos()
-    local draggerAngle = ( draggerPos - ply:GetShootPos() ):Angle()
+    --local draggerAngle = ( draggerPos - ply:GetShootPos() ):Angle()
     local distanceAmount = plyPos:DistToSqr( draggerPos )
     if distanceAmount >= ( 100 * 100 ) then
         local dragSpeedLimit = GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT and GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT or 0
@@ -209,7 +209,7 @@ function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
             GlorifiedHandcuffs.PlayerDragStopped( ply )
             return
         end
-        ply:SetEyeAngles( draggerAngle + Angle( -35, 0, 0 ) )
+        --ply:SetEyeAngles( draggerAngle + Angle( -35, 0, 0 ) )
         ply:SetVelocity( clampVector( draggerPos - plyPos, -100, 100 ) )
     end
 end
