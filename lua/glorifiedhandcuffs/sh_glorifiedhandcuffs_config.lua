@@ -11,8 +11,11 @@ GlorifiedHandcuffs.Config.JAILER_ARREST_TIME = 120 -- How long will a player be 
 GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100 -- How much will a cop get rewarded for an arrest?
 
 GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
-GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125
+GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125 -- How far can a player handcuff from?
 GlorifiedHandcuffs.Config.TIME_TO_CUFF = 0.4 -- How many seconds must the player remain within distance to handcuff?
+
+GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT = true -- Is there a speed limit on dragging?
+GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT = 500 -- What's the speed limit on dragging?
 
 GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500 -- How much does it cost to bail someone out?
 
@@ -20,6 +23,9 @@ GlorifiedHandcuffs.Config.BREAK_FREE_KEY = KEY_E -- The key to break free.
 GlorifiedHandcuffs.Config.BREAK_FREE_KEY_NAME = "E" -- The string for the key that appears in the HUD.
 GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY = KEY_J -- The key to surrender.
 GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J" -- The string for the key that appears in the HUD.
+
+GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_TIME = 5 -- How many seconds should the Nightstick freeze a player for?
+GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_PUSH_DISTANCE = 100 -- How far should the Nightstick push a stunned player?
 
 GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST = { -- Which player models cannot be handcuffed?
     ["example_model_here.mdl"] = true
@@ -50,6 +56,7 @@ GlorifiedHandcuffs.Config.WEAPON_BLACKLIST = { -- Which weapons will not appear 
     ["weapon_physcannon"] = true,
     ["glorifiedhandcuffs_restrained"] = true,
     ["glorifiedhandcuffs_handcuffs"] = true,
+    ["glorifiedhandcuffs_nightstick"] = true,
 }
 GlorifiedHandcuffs.Config.LEGAL_WEAPONS = { -- Weapons that are legal with a gun license.
     ["weapon_glock2"] = true,

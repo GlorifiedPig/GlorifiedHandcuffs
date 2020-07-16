@@ -204,7 +204,8 @@ function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
     local draggerAngle = ( draggerPos - ply:GetShootPos() ):Angle()
     local distanceAmount = plyPos:DistToSqr( draggerPos )
     if distanceAmount >= ( 100 * 100 ) then
-        if distanceAmount >= ( 500 * 500 ) then
+        local dragSpeedLimit = GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT and GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT or 0
+        if distanceAmount >= ( dragSpeedLimit * dragSpeedLimit ) then
             GlorifiedHandcuffs.PlayerDragStopped( ply )
             return
         end
