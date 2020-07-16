@@ -36,7 +36,7 @@ SWEP.ViewModelFOV = 85
 SWEP.DrawCrosshair = false
 
 function SWEP:Initialize()
-    self:SetHoldType( "normal" )
+    self:SetHoldType( "Melee" )
 end
 
 function SWEP:PrimaryAttack()
@@ -76,6 +76,7 @@ function SWEP:PrimaryAttack()
         self:EmitSound( "Weapon_Stunstick.Melee_Miss" )
         self:SendWeaponAnim( ACT_VM_MISSCENTER )
     end
+    self.Owner:SetAnimation( PLAYER_ATTACK1 )
 end
 
 function SWEP:SecondaryAttack() end
