@@ -26,5 +26,6 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "pl", {
     gagPlayer = "Zaknebluj Gracza",
     removeGag = "Usun Knebel",
     confiscate = "Skonfiskować",
-    baton = "Pałka"
+    handcuffs = "Kajdany",
+    baton = "Pałka",
 } )

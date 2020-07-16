@@ -25,5 +25,7 @@ GlorifiedHandcuffs.i18n.RegisterPhrases( "fr", {
     removeBlindfold = "Retirer les yeux bandés",
     gagPlayer = "Gag le joueuer",
     removeGag = "Supprimer le bâillon",
-    confiscate = "Confisquer"
+    confiscate = "Confisquer",
+    handcuffs = "Menottes",
+    baton = "Bâton",
 })
