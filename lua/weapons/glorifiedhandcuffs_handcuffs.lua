@@ -56,20 +56,25 @@ function SWEP:PrimaryAttack()
     local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
+
     if GlorifiedHandcuffs.IsPlayerHandcuffed( tr.Entity ) then return end
-    if not GlorifiedHandcuffs.IsPlayerPolice( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) then return end
+    if not GlorifiedHandcuffs.IsPlayerPolice( ply ) and not GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER and not GlorifiedHandcuffs.IsPlayerSurrendering( tr.Entity ) and not GlorifiedHandcuffs.Config.JAIL_ONLY_MODE or ( GlorifiedHandcuffs.Config.JAIL_ONLY_MODE and not GlorifiedHandcuffs.IsPlayerPolice( ply ) ) then return end
 
     self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
 
     timer.Simple( 1, function()
-        if not self then return end
+        if not self or not self:IsValid() then return end
         self:SendWeaponAnim( ACT_VM_IDLE )
     end )
 
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer" )
     timer.Create( ply:UserID() .. ".GlorifiedHandcuffs.CuffTimer", GlorifiedHandcuffs.Config.TIME_TO_CUFF, 1, function()
         if ply and tr.Entity and ply:Alive() and tr.Entity:Alive() and ply:GetPos():DistToSqr( tr.Entity:GetPos() ) <= maxDist * maxDist then
-            GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, tr.Entity )
+            if GlorifiedHandcuffs.Config.JAIL_ONLY_MODE then
+                GlorifiedHandcuffs.ArrestPlayer( tr.Entity, GlorifiedHandcuffs.Config.JAILER_ARREST_TIME, ply )
+            else
+                GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, tr.Entity )
+            end
         end
     end )
 end
@@ -83,7 +88,11 @@ function SWEP:SecondaryAttack()
     local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE
     if tr.HitPos:DistToSqr( ply:GetPos() ) > maxDist * maxDist then return end
     if not tr.Entity:IsPlayer() then return end
-    if GlorifiedHandcuffs.GetPlayerHandcuffer( tr.Entity ) != ply then return end
 
-    GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, tr.Entity )
+    if GlorifiedHandcuffs.Config.JAIL_ONLY_MODE then
+        if not GlorifiedHandcuffs.IsPlayerPolice( ply ) then return end
+        GlorifiedHandcuffs.UnArrestPlayer( tr.Entity )
+    elseif GlorifiedHandcuffs.GetPlayerHandcuffer( tr.Entity ) == ply then
+        GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, tr.Entity )
+    end
 end

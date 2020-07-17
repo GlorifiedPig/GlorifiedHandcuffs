@@ -6,6 +6,8 @@ GlorifiedHandcuffs.ClearHandcuffVarsHooks = {
     "playerArrested",
     "playerUnArrested"
 }
+GlorifiedHandcuffs.PlayerArrestedHook = "playerArrested"
+GlorifiedHandcuffs.PlayerUnArrestedHook = "playerUnArrested"
 
 function GlorifiedHandcuffs.IsPlayerPolice( ply )
     if not ply or isnumber( ply ) or not ply:IsValid() or not ply:IsPlayer() then return false end
@@ -55,6 +57,10 @@ if SERVER then
 
     function GlorifiedHandcuffs.Notify( ply, msgType, time, message )
         DarkRP.notify( ply, msgType, time, message )
+    end
+
+    function GlorifiedHandcuffs.SetPlayerTeam( ply, team )
+        ply:changeTeam( team, true, true, true )
     end
 else
     function GlorifiedHandcuffs.Notify( msgType, time, message )

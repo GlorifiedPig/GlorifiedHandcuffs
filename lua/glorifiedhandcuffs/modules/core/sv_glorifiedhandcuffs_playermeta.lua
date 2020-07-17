@@ -250,6 +250,20 @@ hook.Add( "SetupMove", "GlorifiedHandcuffs.PlayerMeta.SetupMove", function( ply,
     end
 end )
 
+hook.Add( GlorifiedHandcuffs.PlayerArrestedHook, "GlorifiedHandcuffs.PlayerMeta.PlayerArrested", function( ply )
+    if GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL and not ply:GlorifiedHandcuffs().OldArrestTeam then
+        ply:GlorifiedHandcuffs().OldArrestTeam = ply:Team()
+        GlorifiedHandcuffs.SetPlayerTeam( ply, GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL_TEAM )
+    end
+end )
+
+hook.Add( GlorifiedHandcuffs.PlayerUnArrestedHook, "GlorifiedHandcuffs.PlayerMeta.PlayerUnArrested", function( ply )
+    if GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL and ply:GlorifiedHandcuffs().OldArrestTeam then
+        GlorifiedHandcuffs.SetPlayerTeam( ply, ply:GlorifiedHandcuffs().OldArrestTeam )
+        ply:GlorifiedHandcuffs().OldArrestTeam = nil
+    end
+end )
+
 hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )
     for k, v in pairs( player.GetAll() ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then

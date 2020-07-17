@@ -8,7 +8,10 @@ GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true -- Should we play a
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav" -- See above.
 
 GlorifiedHandcuffs.Config.JAILER_ARREST_TIME = 120 -- How long will a player be arrested at the jailer for?
-GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100 -- How much will a cop get rewarded for an arrest?
+GlorifiedHandcuffs.Config.JAILER_ARREST_REWARD = 100 -- How much will a cop get rewarded for an arrest? Only works if jail only mode is off.
+GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL = false -- Should we change the player's job upon jailing?
+GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL_TEAM = TEAM_CITIZEN -- Which job would you like to change to?
+GlorifiedHandcuffs.Config.JAIL_ONLY_MODE = false -- Set to true if you would like the handcuffs to behave like an arrest baton, arresting upon handcuffing.
 
 GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
 GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125 -- How far can a player handcuff from?
