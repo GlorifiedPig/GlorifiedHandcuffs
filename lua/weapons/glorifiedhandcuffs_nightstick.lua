@@ -62,7 +62,7 @@ function SWEP:PrimaryAttack()
             if not trEntity:IsFrozen() then
                 trEntity:Freeze( true )
                 timer.Simple( GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_TIME, function()
-                    if trEntity and not GlorifiedHandcuffs.IsPlayerHandcuffed( trEntity ) then
+                    if trEntity and trEntity:IsValid() and trEntity:IsPlayer() and not GlorifiedHandcuffs.IsPlayerHandcuffed( trEntity ) then
                         trEntity:Freeze( false )
                     end
                 end )
@@ -70,7 +70,7 @@ function SWEP:PrimaryAttack()
         end
 
         timer.Simple( 0.12, function()
-            if not self then return end
+            if not self or not trEntity or not trEntity:IsValid() then return end
             if trEntity:IsPlayer() then
                 trEntity:SetVelocity( ( trEntity:GetPos() - self:GetOwner():GetPos() ) * 5 )
             end

@@ -1,5 +1,5 @@
 
-GlorifiedHandcuffs.i18n.RegisterPhrases( "es", {
+GlorifiedHandcuffs.i18n.RegisterPhrases( "es-ES", {
     cuffed = "Estas esposado",
     blindfolded = "Estas cegado",
     gagged = "Estas silenciado",
