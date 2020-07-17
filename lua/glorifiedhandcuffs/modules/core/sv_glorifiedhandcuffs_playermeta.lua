@@ -32,7 +32,7 @@ boneManipPositions["handcuffed"] = {
 }
 
 function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
-    if GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or ( surrendering and ply:IsFrozen() ) then return end
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then return end
     resetBoneAngles( ply )
 
     if surrendering then
