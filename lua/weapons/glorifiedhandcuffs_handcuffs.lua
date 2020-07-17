@@ -48,7 +48,9 @@ function SWEP:PrimaryAttack()
     self:SetNextPrimaryFire( CurTime() + GlorifiedHandcuffs.Config.TIME_TO_CUFF )
     local ply = self:GetOwner()
 
+    self:GetOwner():LagCompensation( true )
     local tr = ply:GetEyeTraceNoCursor()
+    self:GetOwner():LagCompensation( false )
     if not tr.Hit then return end
 
     local maxDist = GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE

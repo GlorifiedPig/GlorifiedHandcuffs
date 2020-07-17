@@ -1,9 +1,8 @@
 
 GlorifiedHandcuffs.Config.BREAK_FREE_ENABLED = true -- Should the break free system be enabled?
-GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME = 0.04 -- What's the minimum time between clicks when breaking out?
+GlorifiedHandcuffs.Config.BREAK_FREE_MIN_TIME = 0.05 -- What's the minimum time between clicks when breaking out?
 GlorifiedHandcuffs.Config.BREAK_FREE_EXPIRY_TIME = 0.11 -- What's the maximum time between clicks when breaking out?
 GlorifiedHandcuffs.Config.BREAK_FREE_TOTAL = 100 -- How many clicks are required to break out?
-GlorifiedHandcuffs.Config.BREAK_FREE_CUTOFF = 0.95 -- At what percentage will the timer stop resetting? This makes it easier with lagg.
 GlorifiedHandcuffs.Config.BREAK_FREE_WANTED = true -- Should we make the player wanted for breaking out?
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE = true -- Should we play a 3D sound when the player fails breaking out?
 GlorifiedHandcuffs.Config.BREAK_FREE_SOUND_ON_FAILURE_PATH = "physics/metal/metal_box_impact_hard2.wav" -- See above.

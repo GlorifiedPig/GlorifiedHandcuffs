@@ -48,7 +48,9 @@ function SWEP:PrimaryAttack()
         maxs = Vector( 5, 5, 5 ),
         filter = self.Owner
     }
+    self:GetOwner():LagCompensation( true )
     traceResult = util.TraceHull( traceResult )
+    self:GetOwner():LagCompensation( false )
 
     if traceResult.Hit then
         local trEntity = traceResult.Entity
