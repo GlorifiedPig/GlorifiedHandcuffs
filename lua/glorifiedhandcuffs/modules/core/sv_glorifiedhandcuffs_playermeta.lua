@@ -41,7 +41,6 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
         end
     end
 
-    ply:Freeze( surrendering )
     ply:GlorifiedHandcuffs().Surrendering = surrendering
     ply:SetNWBool( "GlorifiedHandcuffs.Surrendering", surrendering )
     hook.Run( "GlorifiedHandcuffs.PlayerSurrenderStatusUpdated", ply, surrendering )
@@ -239,6 +238,16 @@ end )
 
 hook.Add( "PlayerCanHearPlayersVoice", "GlorifiedHandcuffs.PlayerMeta.PlayerCanHearPlayersVoice", function( listener, ply )
     if GlorifiedHandcuffs.IsPlayerGagged( ply ) then return false end
+end )
+
+hook.Add( "CanPlayerSuicide", "GlorifiedHandcuffs.PlayerMeta.CanPlayerSuicide", function( ply )
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) or GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then return false end
+end )
+
+hook.Add( "SetupMove", "GlorifiedHandcuffs.PlayerMeta.SetupMove", function( ply, mv )
+    if GlorifiedHandcuffs.IsPlayerSurrendering( ply ) then
+        mv:SetMaxClientSpeed( 100 )
+    end
 end )
 
 hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )

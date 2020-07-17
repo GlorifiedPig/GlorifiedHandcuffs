@@ -13,7 +13,7 @@ local hitToFreeFontW = surface.GetTextSize( ghi18n.GetPhrase( "putHandsDown" ) )
 local scrW = ScrW()
 
 hook.Add( "HUDPaint", "GlorifiedLeveling.HUD.Surrendering", function()
-    if not GlorifiedHandcuffs.IsPlayerSurrendering( LocalPlayer() ) then return end
+    if not GlorifiedHandcuffs.IsPlayerSurrendering( LocalPlayer() ) or not LocalPlayer():Alive() then return end
     if not ply then ply = LocalPlayer() end
     surface.SetMaterial( surrenderMaterial )
     surface.SetDrawColor( 255, 255, 255 )

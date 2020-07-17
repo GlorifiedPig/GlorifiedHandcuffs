@@ -43,7 +43,7 @@ local colorBlack = Color( 0, 0, 0 )
 local playerBlindfolded
 
 hook.Add( "HUDPaint", "GlorifiedLeveling.HUD.Handcuffed", function()
-    if not GlorifiedHandcuffs.IsPlayerHandcuffed( LocalPlayer() ) then return end
+    if not GlorifiedHandcuffs.IsPlayerHandcuffed( LocalPlayer() ) or not LocalPlayer():Alive() then return end
     if not ply then ply = LocalPlayer() end
     playerBlindfolded = GlorifiedHandcuffs.IsPlayerBlindfolded( LocalPlayer() )
     if playerBlindfolded then
