@@ -37,6 +37,8 @@ function GlorifiedHandcuffs.SetPlayerSurrenderStatus( ply, surrendering )
 
     if surrendering then
         for k, v in pairs( boneManipPositions["surrender"] ) do
+            local bone = ply:LookupBone( k )
+            if not bone then return end
             ply:ManipulateBoneAngles( ply:LookupBone( k ), v )
         end
     end
