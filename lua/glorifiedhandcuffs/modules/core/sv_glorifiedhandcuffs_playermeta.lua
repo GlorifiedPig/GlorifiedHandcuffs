@@ -195,6 +195,30 @@ function GlorifiedHandcuffs.PlayerDragStopped( ply )
     timer.Remove( ply:UserID() .. ".GlorifiedHandcuffs.DragTimer" )
 end
 
+function GlorifiedHandcuffs.InsertPlayerIntoVehicle( ply, vehicle, cuffer )
+    if cuffer:GlorifiedHandcuffs().RecentlyInsertedPlayer then return end
+    cuffer:GlorifiedHandcuffs().RecentlyInsertedPlayer = true
+    timer.Simple( 5, function()
+        if cuffer then cuffer:GlorifiedHandcuffs().RecentlyInsertedPlayer = false end
+    end )
+    local availableSeats = vehicle.VC_getSeatsAvailable and vehicle:VC_getSeatsAvailable() or 0
+    if #availableSeats <= 1 then return end
+    for k, v in pairs( availableSeats ) do
+        if not v:GetDriver():IsValid() and k != 1 then
+            ply:EnterVehicle( v )
+            ply:Freeze( true )
+            return
+        end
+    end
+end
+
+function GlorifiedHandcuffs.RemovePlayerFromVehicle( ply )
+    local cuffer = GlorifiedHandcuffs.GetPlayerHandcuffer( ply )
+    cuffer:GlorifiedHandcuffs().RecentlyInsertedPlayer = false
+    ply:ExitVehicle()
+    ply:Freeze( false )
+end
+
 local function clampVector( vector, min, max )
     return Vector( math.Clamp( vector.x, min, max ), math.Clamp( vector.y, min, max ), math.Clamp( vector.z, min, max ) )
 end
@@ -272,6 +296,20 @@ hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnecte
             GlorifiedHandcuffs.ResetAllHandcuffVars( v )
         end
     end
+end )
+
+hook.Add( "CanPlayerEnterVehicle", "GlorifiedHandcuffs.PlayerMeta.CanPlayerEnterVehicle", function( ply, vehicle )
+    local vehiclePassengers = vehicle.VC_getPlayers and vehicle:VC_getPlayers() or {}
+    for k, v in pairs( vehiclePassengers ) do
+        if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then GlorifiedHandcuffs.RemovePlayerFromVehicle( v ) end
+    end
+
+    local handcuffed
+    for k, v in pairs( player.GetAll() ) do
+        if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then handcuffed = v break end
+    end
+    if not handcuffed then return end
+    GlorifiedHandcuffs.InsertPlayerIntoVehicle( handcuffed, vehicle, ply )
 end )
 
 for k, v in pairs( GlorifiedHandcuffs.ClearHandcuffVarsHooks ) do
