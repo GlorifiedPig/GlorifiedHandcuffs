@@ -300,9 +300,12 @@ end )
 
 hook.Add( "CanPlayerEnterVehicle", "GlorifiedHandcuffs.PlayerMeta.CanPlayerEnterVehicle", function( ply, vehicle )
     local vehiclePassengers = vehicle.VC_getPlayers and vehicle:VC_getPlayers() or {}
+    local playersRemoved = false
     for k, v in pairs( vehiclePassengers ) do
-        if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then GlorifiedHandcuffs.RemovePlayerFromVehicle( v ) end
+        if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then playersRemoved = true GlorifiedHandcuffs.RemovePlayerFromVehicle( v ) end
     end
+
+    if playersRemoved then return false end
 
     local handcuffed
     for k, v in pairs( player.GetAll() ) do
@@ -310,6 +313,7 @@ hook.Add( "CanPlayerEnterVehicle", "GlorifiedHandcuffs.PlayerMeta.CanPlayerEnter
     end
     if not handcuffed then return end
     GlorifiedHandcuffs.InsertPlayerIntoVehicle( handcuffed, vehicle, ply )
+    return false
 end )
 
 for k, v in pairs( GlorifiedHandcuffs.ClearHandcuffVarsHooks ) do

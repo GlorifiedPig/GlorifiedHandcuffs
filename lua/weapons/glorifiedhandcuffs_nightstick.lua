@@ -75,6 +75,7 @@ function SWEP:PrimaryAttack()
                 trEntity:SetVelocity( ( trEntity:GetPos() - self:GetOwner():GetPos() ) * 5 )
             end
             self:EmitSound( soundToEmit )
+            hook.Run( "GlorifiedHandcuffs.BatonUsed", self:GetOwner(), trEntity )
         end )
     else
         self:EmitSound( "Weapon_Stunstick.Melee_Miss" )
