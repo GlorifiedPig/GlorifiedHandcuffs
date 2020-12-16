@@ -44,6 +44,7 @@ function PANEL:SetPlayer( ply )
     for k, v in pairs( ply:GetWeapons() ) do
         if not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[v:GetClass()] then continue end
         if GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[v:GetClass()] then continue end
+        if ply.getJobTable and table.HasValue( ply:getJobTable().weapons or {}, v:GetClass() ) then continue end -- I need to table.HasValue here because of the retarded way DarkRP sets up the loadout.
         self.WeaponsBox:AddWeapon( v )
     end
 

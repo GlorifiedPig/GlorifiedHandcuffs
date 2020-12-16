@@ -160,6 +160,7 @@ function GlorifiedHandcuffs.StripAllWeapons( ply, giveToPly, plyToGiveTo )
         local weaponClass = v:GetClass()
         if not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
         if GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
+        if ply.getJobTable and table.HasValue( ply:getJobTable().weapons or {}, weaponClass ) then continue end -- I need to table.HasValue here because of the retarded way DarkRP sets up the loadout.
         ply:StripWeapon( weaponClass )
         if giveToPly and plyToGiveTo then
             plyToGiveTo:Give( weaponClass )
@@ -173,6 +174,7 @@ function GlorifiedHandcuffs.StripAllIllegalWeapons( ply, giveToPly, plyToGiveTo 
         if not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
         if GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
         if GlorifiedHandcuffs.Config.LEGAL_WEAPONS[weaponClass] and GlorifiedHandcuffs.HasGunLicense( ply ) then continue end
+        if ply.getJobTable and table.HasValue( ply:getJobTable().weapons or {}, weaponClass ) then continue end -- I need to table.HasValue here because of the retarded way DarkRP sets up the loadout.
         ply:StripWeapon( weaponClass )
         if giveToPly and plyToGiveTo then
             plyToGiveTo:Give( weaponClass )
