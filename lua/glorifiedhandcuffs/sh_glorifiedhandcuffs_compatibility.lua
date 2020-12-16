@@ -43,6 +43,11 @@ function GlorifiedHandcuffs.HasGunLicense( ply )
     return ply:getDarkRPVar( "HasGunlicense" )
 end
 
+function GlorifiedHandcuffs.IsPlayerWanted( ply )
+    if not ply or not ply:IsValid() or not ply:IsPlayer() then return false end
+    return ply:isWanted()
+end
+
 if SERVER then
     function GlorifiedHandcuffs.ArrestPlayer( ply, time, arrester )
         GlorifiedHandcuffs.ResetAllHandcuffVars( ply )

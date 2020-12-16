@@ -120,7 +120,7 @@ function GlorifiedHandcuffs.TogglePlayerGagged( ply )
 end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
-    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST[ply:GetModel()] or GlorifiedHandcuffs.Config.TEAM_WHITELIST[handcuffed:Team()] then return end
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST[ply:GetModel()] or GlorifiedHandcuffs.Config.TEAM_WHITELIST[handcuffed:Team()] or ( GlorifiedHandcuffs.Config.ONLY_ALLOW_HANDCUFF_IF_PLAYER_WANTED and not GlorifiedHandcuffs.IsPlayerWanted( ply ) ) then return end
 
     handcuffed:GlorifiedHandcuffs().Handcuffer = ply:UserID()
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
@@ -129,7 +129,7 @@ function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
 end
 
 function GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, handcuffed )
-    if not GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.GetPlayerHandcuffer( handcuffed ) != ply then return end
+    if not GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or ( GlorifiedHandcuffs.GetPlayerHandcuffer( handcuffed ) != ply and not ( GlorifiedHandcuffs.Config.CAN_ANY_COP_RELEASE_HANDCUFFS and GlorifiedHandcuffs.IsPlayerPolice( ply ) ) ) then return end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( handcuffed, false )
     hook.Run( "GlorifiedHandcuffs.PlayerUnHandcuffPlayer", ply, handcuffed )
 end

@@ -14,6 +14,8 @@ GlorifiedHandcuffs.Config.TEAM_CHANGE_UPON_JAIL_TEAM = TEAM_CITIZEN -- Which job
 GlorifiedHandcuffs.Config.JAIL_ONLY_MODE = false -- Set to true if you would like the handcuffs to behave like an arrest baton, arresting upon handcuffing.
 
 GlorifiedHandcuffs.Config.CAN_NORMAL_PLAYER_HANDCUFF_WITHOUT_SURRENDER = true -- Can a normal player handcuff without the person being handcuffed surrendering?
+GlorifiedHandcuffs.Config.ONLY_ALLOW_HANDCUFF_IF_PLAYER_WANTED = false -- Should we only allow an officer to handcuff a player if they're wanted?
+GlorifiedHandcuffs.Config.CAN_ANY_COP_RELEASE_HANDCUFFS = false -- Set this to true if you want any cop to release someone from handcuffs.
 GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125 -- How far can a player handcuff from?
 GlorifiedHandcuffs.Config.TIME_TO_CUFF = 0.4 -- How many seconds must the player remain within distance to handcuff?
 
