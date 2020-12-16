@@ -120,7 +120,7 @@ function GlorifiedHandcuffs.TogglePlayerGagged( ply )
 end
 
 function GlorifiedHandcuffs.PlayerHandcuffPlayer( ply, handcuffed )
-    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST[ply:GetModel()] or GlorifiedHandcuffs.Config.TEAM_WHITELIST[ply:Team()] then return end
+    if GlorifiedHandcuffs.IsPlayerHandcuffed( handcuffed ) or GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST[ply:GetModel()] or GlorifiedHandcuffs.Config.TEAM_WHITELIST[handcuffed:Team()] then return end
 
     handcuffed:GlorifiedHandcuffs().Handcuffer = ply:UserID()
     handcuffed:SetNWInt( "GlorifiedHandcuffs.Handcuffer", ply:UserID() )
