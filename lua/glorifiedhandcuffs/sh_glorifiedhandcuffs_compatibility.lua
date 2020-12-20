@@ -1,5 +1,5 @@
 
-GlorifiedHandcuffs.HookRunName = "DarkRPFinishedLoading" -- Which hook should we start loading GlorifiedHandcuffs files in?
+GlorifiedHandcuffs.HookRunName = "loadCustomDarkRPItems" -- Which hook should we start loading GlorifiedHandcuffs files in?
 GlorifiedHandcuffs.ClearHandcuffVarsHooks = {
     "PlayerSpawn",
     "PlayerDeath",

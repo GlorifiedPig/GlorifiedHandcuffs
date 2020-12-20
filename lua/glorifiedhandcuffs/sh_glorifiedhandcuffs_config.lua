@@ -19,8 +19,9 @@ GlorifiedHandcuffs.Config.CAN_ANY_COP_RELEASE_HANDCUFFS = false -- Set this to t
 GlorifiedHandcuffs.Config.HANDCUFF_DISTANCE = 125 -- How far can a player handcuff from?
 GlorifiedHandcuffs.Config.TIME_TO_CUFF = 0.4 -- How many seconds must the player remain within distance to handcuff?
 
-GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT = true -- Is there a speed limit on dragging?
-GlorifiedHandcuffs.Config.DRAG_SPEED_LIMIT = 500 -- What's the speed limit on dragging?
+GlorifiedHandcuffs.Config.DRAG_DISTANCE_LIMIT = true -- Is there a speed limit on dragging?
+GlorifiedHandcuffs.Config.DRAG_DISTANCE_LIMIT_COUNT = 500 -- What's the speed limit on dragging?
+GlorifiedHandcuffs.Config.DRAG_SPEED_COUNT = 100 -- What's the speed count on dragging?
 
 GlorifiedHandcuffs.Config.BAIL_AMOUNT = 2500 -- How much does it cost to bail someone out?
 
