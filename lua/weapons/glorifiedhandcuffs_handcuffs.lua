@@ -92,7 +92,7 @@ function SWEP:SecondaryAttack()
     if GlorifiedHandcuffs.Config.JAIL_ONLY_MODE then
         if not GlorifiedHandcuffs.IsPlayerPolice( ply ) then return end
         GlorifiedHandcuffs.UnArrestPlayer( tr.Entity )
-    elseif GlorifiedHandcuffs.GetPlayerHandcuffer( tr.Entity ) == ply then
+    else
         GlorifiedHandcuffs.PlayerUnHandcuffPlayer( ply, tr.Entity )
     end
 end
