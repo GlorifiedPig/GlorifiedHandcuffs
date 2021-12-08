@@ -141,7 +141,7 @@ end
 
 function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
     local playersJailed = 0
-    for k, v in pairs( ents.FindInSphere( jailerNPC:GetPos(), 1000 ) ) do
+    for _, v in ipairs( ents.FindInSphere( jailerNPC:GetPos(), 1000 ) ) do
         if v:IsPlayer() and GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == jailer and GlorifiedHandcuffs.IsPlayerPolice( jailer ) then
             playersJailed = playersJailed + 1
             GlorifiedHandcuffs.ArrestPlayer( v, GlorifiedHandcuffs.Config.JAILER_ARREST_TIME, jailer )
@@ -156,7 +156,7 @@ function GlorifiedHandcuffs.JailNearbyPlayers( jailer, jailerNPC )
 end
 
 function GlorifiedHandcuffs.StripAllWeapons( ply, giveToPly, plyToGiveTo )
-    for k, v in pairs( ply:GetWeapons() ) do
+    for _, v in ipairs( ply:GetWeapons() ) do
         local weaponClass = v:GetClass()
         if not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
         if GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
@@ -169,7 +169,7 @@ function GlorifiedHandcuffs.StripAllWeapons( ply, giveToPly, plyToGiveTo )
 end
 
 function GlorifiedHandcuffs.StripAllIllegalWeapons( ply, giveToPly, plyToGiveTo )
-    for k, v in pairs( ply:GetWeapons() ) do
+    for _, v in ipairs( ply:GetWeapons() ) do
         local weaponClass = v:GetClass()
         if not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
         if GlorifiedHandcuffs.Config.WEAPON_BLACKLIST_IS_WHITELIST and not GlorifiedHandcuffs.Config.WEAPON_BLACKLIST[weaponClass] then continue end
@@ -228,7 +228,7 @@ end
 function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
     local draggerPos = dragger:GetPos()
     local plyPos = ply:GetPos()
-    --local draggerAngle = ( draggerPos - ply:GetShootPos() ):Angle()
+
     local distanceAmount = plyPos:DistToSqr( draggerPos )
     if distanceAmount >= ( 100 * 100 ) then
         local dragSpeedLimit = GlorifiedHandcuffs.Config.DRAG_DISTANCE_LIMIT and GlorifiedHandcuffs.Config.DRAG_DISTANCE_LIMIT_COUNT or 0
@@ -236,7 +236,7 @@ function GlorifiedHandcuffs.PlayerDragMove( ply, dragger )
             GlorifiedHandcuffs.PlayerDragStopped( ply )
             return
         end
-        --ply:SetEyeAngles( draggerAngle + Angle( -35, 0, 0 ) )
+
         ply:SetVelocity( clampVector( draggerPos - plyPos, -GlorifiedHandcuffs.Config.DRAG_SPEED_COUNT or -100, GlorifiedHandcuffs.Config.DRAG_SPEED_COUNT or 100 ) )
     end
 end
@@ -293,7 +293,7 @@ hook.Add( GlorifiedHandcuffs.PlayerUnArrestedHook, "GlorifiedHandcuffs.PlayerMet
 end )
 
 hook.Add( "PlayerDisconnected", "GlorifiedHandcuffs.PlayerMeta.PlayerDisconnected", function( ply )
-    for k, v in pairs( player.GetAll() ) do
+    for _, v in ipairs( player.GetAll() ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then
             GlorifiedHandcuffs.ResetAllHandcuffVars( v )
         end
@@ -303,14 +303,14 @@ end )
 hook.Add( "CanPlayerEnterVehicle", "GlorifiedHandcuffs.PlayerMeta.CanPlayerEnterVehicle", function( ply, vehicle )
     local vehiclePassengers = vehicle.VC_getPlayers and vehicle:VC_getPlayers() or {}
     local playersRemoved = false
-    for k, v in pairs( vehiclePassengers ) do
+    for _, v in ipairs( vehiclePassengers ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then playersRemoved = true GlorifiedHandcuffs.RemovePlayerFromVehicle( v ) end
     end
 
     if playersRemoved then return false end
 
     local handcuffed
-    for k, v in pairs( player.GetAll() ) do
+    for _, v in ipairs( player.GetAll() ) do
         if GlorifiedHandcuffs.IsPlayerHandcuffed( v ) and GlorifiedHandcuffs.GetPlayerHandcuffer( v ) == ply then handcuffed = v break end
     end
     if not handcuffed then return end
@@ -318,7 +318,13 @@ hook.Add( "CanPlayerEnterVehicle", "GlorifiedHandcuffs.PlayerMeta.CanPlayerEnter
     return false
 end )
 
-for k, v in pairs( GlorifiedHandcuffs.ClearHandcuffVarsHooks ) do
+hook.Add( "PlayerSpawnProp", "GlorifiedHandcuffs.PlayerMeta.PlayerSpawnProp", function( ply, mdl )
+    if IsValid( ply ) and GlorifiedHandcuffs.IsPlayerHandcuffed( ply ) then
+        return false
+    end
+end )
+
+for _, v in ipairs( GlorifiedHandcuffs.ClearHandcuffVarsHooks ) do
     hook.Add( v, "GlorifiedHandcuffs.PlayerMeta." .. v, GlorifiedHandcuffs.ResetAllHandcuffVars )
 end
 
