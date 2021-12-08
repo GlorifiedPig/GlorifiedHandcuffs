@@ -33,6 +33,8 @@ GlorifiedHandcuffs.Config.TOGGLE_SURRENDER_KEY_NAME = "J" -- The string for the 
 GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_TIME = 5 -- How many seconds should the Nightstick freeze a player for?
 GlorifiedHandcuffs.Config.NIGHTSTICK_STUN_PUSH_DISTANCE = 100 -- How far should the Nightstick push a stunned player?
 
+GlorifiedHandcuffs.Config.SUPPORT_BLOGS = false -- Should bLogs be supported?
+
 GlorifiedHandcuffs.Config.PLAYERMODEL_WHITELIST = { -- Which player models cannot be handcuffed?
     ["example_model_here.mdl"] = true
 }

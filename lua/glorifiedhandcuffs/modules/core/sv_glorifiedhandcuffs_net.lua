@@ -92,6 +92,7 @@ net.Receive( "GlorifiedHandcuffs.BreakFree.AttemptSuccess", function( len, ply )
         ply:wanted( GlorifiedHandcuffs.GetPlayerHandcuffer( ply ), GlorifiedHandcuffs.i18n.GetPhrase( "brokenFreeWanted" ), 180 )
     end
     GlorifiedHandcuffs.SetPlayerHandcuffedStatus( ply, false )
+    hook.Run( "GlorifiedHandcuffs.PlayerBrokeFree", ply )
 end )
 
 function GlorifiedHandcuffs.OpenBailMenu( ply )
